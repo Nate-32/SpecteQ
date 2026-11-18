@@ -359,6 +359,7 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
       }
 
       const sb = getSupabaseClient();
+      let supabaseAuthError: string | null = null;
       if (sb && cleanId.includes('@')) {
         const {data, error} = await sb.auth.signInWithPassword({email: cleanId, password});
         if (!error && data.user) {
@@ -374,6 +375,9 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
           });
           return {ok: true};
         }
+        if (error) {
+          supabaseAuthError = error.message;
+        }
       }
 
       const matchedTeam = state.teams.find(
@@ -384,7 +388,10 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
       );
 
       if (!matchedTeam) {
-        return {ok: false, error: 'No team account found matching that username or email.'};
+        return {
+          ok: false,
+          error: supabaseAuthError || 'No team account found matching that username or email.',
+        };
       }
       if (matchedTeam.status === 'disabled') {
         return {ok: false, error: 'This team account has been disabled by the administrator.'};
