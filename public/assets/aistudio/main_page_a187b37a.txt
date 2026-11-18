@@ -1,0 +1,326 @@
+SPECTEQ 2027 — MAIN WEBSITE PAGE SPECIFICATION Version 1.0 | Reference
+document for website-building agent
+
+PURPOSE This document defines the Main Page of the SpecteQ 2027 website:
+structure, content, visual direction, interactions, and factual-data
+rules. It is a specification, not an implementation prompt.
+
+IMPORTANT PAGE ARCHITECTURE The website has separate pages: 1. MAIN
+PAGE: one long scrolling landing page, containing all sections below. 2.
+GALLERY PAGE: a completely separate page/route. The previous-year
+photo/video gallery must NOT be embedded into the Main Page. Main
+navigation and footer may link to Gallery.
+
+MAIN PAGE SECTION ORDER 1. Hero 2. What Is SpecteQ? 3. Explore the
+Competition — 3 Categories 4. Category Comparison / Choose Your Mission
+5. Participant Journey 6. Event Progression / Level System 7.
+Technologies to Learn 8. Ready to Choose CTA 9. Event Timeline 10.
+Prizes & Rewards 11. Rules & Guidelines 12. FAQ 13. Registration —
+Insert Coin / Join the Game 14. Footer — Quick Links & Connect
+
+VISUAL THEME Modern retro arcade / game-launcher interface. Cinematic
+neon coastal city and waterfront at dusk, modern skyline, reflections,
+atmospheric sunset, subtle palm silhouettes. Premium dark UI,
+translucent glass panels, thin neon borders, restrained glow, gradients,
+grid/HUD details, numbered labels, status chips, progress bars, subtle
+micro-animation. Palette: deep navy/near-black/dark purple, cyan,
+magenta, violet, orange accents, white/light-grey text. Do NOT use
+copyrighted GTA/Vice City logos, characters, branding, or assets. No
+human characters in hero background. Do not make it old-fashioned 8-bit
+or cluttered cyberpunk. Keep it modern, polished, readable, and
+responsive.
+
+TYPOGRAPHY Hero title: large, wide, bold, futuristic italic display type
+similar to reference. Section headings: futuristic geometric display
+font. Body: clean modern sans-serif. HUD/metadata: monospaced or
+technical font. Slogan may use expressive/script-like gradient
+lettering. Limit font families and maintain consistent hierarchy.
+
+NAVIGATION Sticky translucent navigation with SpecteQ wordmark and
+links: Home, About, Missions/Categories, Journey, Technologies,
+Timeline, Rewards, Rules, FAQ, Gallery, Registration/Join Game.
+Main-page links smooth-scroll. Gallery navigates to its separate
+page/route. Registration CTA scrolls to registration section. Mobile
+navigation must be compact and functional. Highlight current
+section/page where practical.
+
+SECTION 01 — HERO Background: full-width cinematic sunset
+city/waterfront with dark overlay for contrast; no people. Text: Small
+label: “THE BOT COMPETITION · 2027 EDITION” Main title: “SpecteQ 2027”
+Slogan: “Build. Battle. Dominate.” Description: “Enter the ultimate
+robotics arena. Learn, experiment, engineer your machines, and compete
+to achieve the highest score.” Primary CTA: “Enter the Arena →” — scroll
+to registration section. Secondary CTA: “Explore Missions” — scroll to
+categories. Add a decorative game HUD panel: PLAYER 01 | Season 2027 ·
+Open Entry STATUS: READY | CURRENT LEVEL: 00 / 03 | MISSION STATUS: NOT
+STARTED This is illustrative UI only. Do not imply the visitor is logged
+in or that real progress is tracked. Cyan READY, white level, orange NOT
+STARTED. Hero should dominate the first viewport. Scale and stack
+responsively.
+
+SECTION 02 — WHAT IS SPECTEQ? Title: “WHAT IS SPECTEQ?” Subtitle: “An
+inclusive robotics competition for all skill levels.” Suggested intro:
+“SpecteQ is a hands-on robotics competition where students learn, build,
+experiment, and compete. Participants move through training, robot
+development, testing, and arena challenges—turning concepts into working
+machines.” Three feature cards: A. COLLEGE COMPETITION — Students come
+together to compete, collaborate, and showcase engineering skills. B.
+ROBOTICS COMPETITION — Experience robotics through practical challenges,
+problem-solving, and competition in a learning-while-competing
+environment. C. HANDS-ON LEARNING — Explore robotics through practical
+challenges, guided learning, experimentation, and real-world engineering
+experience. Use icons, relevant images/illustrations, or a configurable
+launch-film media panel. Do not show a fake video player if no media
+asset exists.
+
+SECTION 03 — EXPLORE THE COMPETITION / THREE CATEGORIES Title: “EXPLORE
+THE COMPETITION” Subtitle: “Choose your challenge. Build your machine.
+Enter the arena.” Show exactly these current categories, based on the
+white website reference: 1. LINE FOLLOWER — Build a robot that follows a
+designated path using sensors, precise navigation, and control
+algorithms. 2. MAZE SOLVER — Create an intelligent robot that navigates
+a maze, detects obstacles/dead ends, and finds its way toward the goal.
+3. SELF BALANCING — Design a two-wheeled robot that maintains balance
+using sensors, feedback control, and real-time decision-making. Each
+card: large category-specific robot visual, category number/mission
+code, title, short description, optional difficulty/technology tags,
+“Explore Mission” CTA. Cards may open details or expand. Avoid unrelated
+generic robot imagery. Exact rules, specifications, track layouts, and
+scoring remain configurable until officially confirmed.
+
+SECTION 04 — CATEGORY COMPARISON / CHOOSE YOUR MISSION Title: “CHOOSE
+YOUR MISSION” Subtitle: “Every mission demands a different way of
+thinking.” Compare: LINE FOLLOWER Core: Follow a designated path
+accurately and efficiently. Skills: IR sensors, calibration, motor
+control, PID/control tuning, path tracking. Learning: Sensor
+calibration, accuracy, speed optimisation, control systems. Difficulty:
+Beginner–Intermediate (confirm officially). Ideal: Beginners or teams
+interested in embedded control. MAZE SOLVER Core: Navigate a maze,
+handle obstacles/dead ends, find a route. Skills: Sensors, navigation,
+path planning, algorithm design. Learning: Algorithm design, sensor
+integration, decision-making. Difficulty: Intermediate (confirm
+officially). Ideal: Teams interested in programming, logic, autonomous
+navigation. SELF BALANCING Core: Maintain a two-wheeled robot upright
+while balancing/moving. Skills: IMU/gyroscope, control theory, PID
+tuning, filtering, motor control. Learning: Control theory, signal
+processing, system dynamics. Difficulty: Advanced (confirm officially).
+Ideal: Experienced teams seeking a more advanced control challenge. Use
+responsive comparison cards or a table that becomes stacked cards on
+mobile. Highlight differences and provide “Choose this Mission” action.
+Do not imply mission choice is final unless confirmed.
+
+SECTION 05 — PARTICIPANT JOURNEY Title: “YOUR JOURNEY” Subtitle: “From
+first boot to High Score Champion.” Terminology: Participants = Players;
+Teams = Gaming Teams; Workshops = Missions; Learning stages = Levels;
+Project completion = Mission Complete; Final competition = The Robotics
+Arena; Winners = High Score Champions. Stages: LEVEL 00 — INSERT COIN:
+Registration/onboarding. “Create your Player profile, form your Gaming
+Team, choose your mission track, and prepare to enter SpecteQ.” LEVEL 01
+— TRAINING: Workshops/learning. “Learn the foundations, explore
+essential technologies, and prepare for your robotics challenge.” LEVEL
+02 — BUILD: Robot development. “Design, assemble, program, and improve
+your robot.” LEVEL 03 — TEST: Testing/debugging/calibration. “Test your
+robot, refine performance, debug systems, and prepare for the arena.”
+FINAL — THE ROBOTICS ARENA: “Take your machine to the arena, compete,
+complete the challenge, and aim for the High Score.” Desktop: horizontal
+journey with connecting line. Mobile: vertical or swipeable. Stages
+selectable; selection may reveal detail. Keep the real-world meaning
+clear.
+
+SECTION 06 — EVENT PROGRESSION / LEVEL SYSTEM Title: “LEVEL PROGRESSION
+SYSTEM” Subtitle: “Click any level to inspect deliverables, completion
+status, and milestones along the SpecteQ player journey.” Progress
+display: “PLAYER PROGRESS: LEVEL 00 / 03” Optional “Simulate Next Level”
+must be explicitly demo-only and must not save real progress. Level
+cards: LEVEL 00 — INSERT COIN | Registration & Onboarding |
+Deliverables: submit Player/Gaming Team details, select preferred
+category, receive confirmation/onboarding info. Achievement: “Coin
+Inserted · Player Onboarded”. LEVEL 01 — TRAINING | Learn the Game ·
+Training Missions | Deliverables: attend/complete learning sessions,
+explore technologies, prepare for challenge. Achievement: “Training
+Complete”. LEVEL 02 — BUILD | Unlock Your Bot · Player Build |
+Deliverables: design/assemble robot, integrate hardware/sensors,
+implement control/programming, test/improve. Achievement: “Bot Built”.
+LEVEL 03 — FINAL BOSS | The Robotics Arena | Deliverables: final
+testing, safety/rules checks, enter arena, compete. Achievement:
+“Mission Complete”. Clicking a level selects it, highlights it, and
+updates a detail panel with description/deliverables/status/achievement.
+Locked/unlocked/progress are visual demo states only unless backend
+tracking is later implemented.
+
+SECTION 07 — TECHNOLOGIES TO LEARN Title: “TECHNOLOGIES TO LEARN”
+Subtitle: “Master essential robotics skills.” Use the two supplied
+technology-section screenshots as inspiration for an animated/moving
+layout—e.g. subtle marquee, staggered moving card columns, carousel, or
+gentle scrolling motion. This is not a pixel-for-pixel copy. Keep motion
+smooth, readable, responsive, and respect reduced-motion settings.
+Technology groups: EMBEDDED SYSTEMS: Arduino/microcontrollers, motor
+controllers, sensor integration, PWM control. PROGRAMMING: C/C++,
+algorithm design, real-time control, embedded programming. CONTROL
+SYSTEMS: PID controllers, feedback loops, sensor fusion, balance
+control. NAVIGATION: path planning, maze solving, line following,
+obstacle detection. SENSORS: IR sensors, ultrasonic sensors,
+gyroscope/accelerometer, calibration. ELECTRONICS: circuit design, power
+management, motor drivers, signal processing. These are learning
+opportunities, not guarantees every participant will cover every item.
+
+SECTION 08 — READY TO CHOOSE CTA Title: “READY TO CHOOSE YOUR MISSION?”
+Text: “Choose your challenge, gather your Gaming Team, and get ready to
+enter the SpecteQ arena.” Button: “CHOOSE YOUR MISSION” Action: scroll
+to the registration section. Do not send to an unrelated page or make it
+a form submission unless configured. Design as a large cinematic glass
+panel with neon accents and arena/robot visual.
+
+SECTION 09 — EVENT TIMELINE Title: “EVENT TIMELINE & MILESTONES”
+Subtitle: “Follow the progression from initial registration through
+final championship awards.” Status: “Dates TBD · Configurable 2027
+Schedule” Do not invent dates. Dates must be configurable. Phases: 01
+REGISTRATION — Registration opens and Gaming Teams sign up. 02 PLAYER
+ONBOARDING — Confirmation, team onboarding, orientation. 03 TRAINING
+MISSIONS — Learning sessions and Level 01 preparation. 04 ROBOT
+DEVELOPMENT — Teams build and develop robots. 05 TESTING & SCRUTINY —
+Testing, calibration, safety checks, preparation. 06 FINAL ROBOTICS
+ARENA — Competition/final challenge. 07 RESULTS & AWARDS — Results,
+recognition, certificates, awards. Use connected timeline cards;
+horizontal desktop, stacked mobile. Expandable details optional.
+Highlight current phase only when real schedule data exists.
+
+SECTION 10 — PRIZES & REWARDS Title: “PRIZES & REWARDS” Subtitle:
+“Exceptional recognition for outstanding talent.” Line: “Based on
+performance, participants may be shortlisted for certificates and cash
+prizes.” Use white reference website data: CERTIFICATES: “Recognized
+SpecteQ certificates for various levels of achievement.” - Participation
+Certificate - Merit Certificate - Excellence Certificate CASH PRIZES:
+“Total prize pool up to ₹10,000” Supporting: “Distributed among
+top-performing teams.” Disclaimer: “* Terms and conditions apply.
+Shortlisted candidates will be rewarded based on selection criteria.”
+Keep prizes configurable. Do not invent category-wise prize breakdowns
+or winners. Display with polished achievement/award visuals.
+
+SECTION 11 — RULES & GUIDELINES Title: “RULES & GUIDELINES” Subtitle:
+“Fair play, safety, integrity, and respect are essential throughout
+SpecteQ.” Follow the supplied Rules & Guidelines reference format:
+numbered accordion panels, metadata/status line, clear sections,
+confirmed vs pending labels. Use factual policy/data from the WHITE
+WEBSITE rules reference. Do not invent or weaken policies. Rule panels:
+01 GENERAL PARTICIPATION RULES — registration, respectful conduct,
+pit/bay safety, marshal instructions; eligibility pending/configurable
+if not confirmed. 02 TEAM REQUIREMENTS — use sourced team
+size/eligibility data; clearly mark pending details. 03 MISSION/CATEGORY
+RULES — category-specific challenge, robot requirements, constraints;
+configurable pending official rules. 04 ROBOT SPECIFICATIONS —
+dimensions, weight, power/hardware restrictions, safety; exact values
+TBD unless sourced. 05 COMPETITION GUIDELINES — arena protocol, timing,
+attempts, marshal/judge instructions; configurable. 06 SCORING CRITERIA
+— weights/formulas configurable; do not invent scores. Say “Scoring
+details to be announced” if unknown. 07 MATERIAL/KIT RESPONSIBILITY —
+use source policy on kit, loss, damage, and team responsibility. 08
+PLAGIARISM/ORIGINALITY — use source policy on originality, code/solution
+sharing, and plagiarism. 09 FINAL DECISION / ORGANIZER AUTHORITY — use
+source policy on decisions and changes. 10 CODE OF CONDUCT — expected:
+respect participants/organizers/mentors/volunteers, ethical teamwork,
+original work and credit, deadlines. Prohibited: copying solutions,
+prohibited sharing, unauthorized assistance where rules disallow it,
+disrespectful/unethical conduct. Contact CTA: “Questions about the
+rules? Need clarification?” button “CONTACT THE COMMITTEE”. Use
+configured email/contact or contact modal; never invent details.
+Accordions must be accessible, readable, and use bullets/subsections
+rather than giant text blocks.
+
+SECTION 12 — FAQ Title: “FREQUENTLY ASKED QUESTIONS” Create editable
+accordion entries: Q: What is SpecteQ? A: A hands-on robotics
+competition where participants learn, build, test, and compete. Q: Who
+can participate? A: Eligibility for 2027 will be announced in official
+rules; check registration details. Q: Do I need prior robotics
+experience? A: Event is intended to encourage learning across skill
+levels; final requirements/support will be announced. Q: How many
+members can be in a team? A: Depends on category; use official team
+requirements. Q: Which categories are available? A: Line Follower, Maze
+Solver, Self Balancing. Q: Do we need to build our own robot? A:
+Requirements and kit policy will be in official category guidelines. Q:
+What technologies will we learn? A: Depending on category/sessions,
+sensors, microcontrollers, programming, motor control, navigation, and
+control systems. Q: When is the event? A: Official schedule will be
+announced; dates currently TBD. Q: What are the prizes? A: Certificates
+and cash prizes; see Rewards section for current announced details. Q:
+How do I register? A: Use the official registration link in the
+registration section. Q: Where can I see previous events? A: Visit the
+separate Gallery page. Q: Who do I contact? A: Use Contact Committee or
+official contact details. Keep answers concise. FAQ content
+configurable.
+
+SECTION 13 — REGISTRATION / INSERT COIN / JOIN THE GAME This is the
+final major conversion section. Label: “LEVEL 00 · PLAYER ENTRY” Title:
+“INSERT COIN. JOIN THE GAME.” Text: “Register your Player profile and
+Gaming Team to begin your SpecteQ journey. Choose your mission and get
+ready to enter the arena.” Show registration information, confirmed
+team/category requirements, and confirmed fees only. If unconfirmed, use
+configurable placeholders. Explain form requirements only when known.
+Primary button: “REGISTER YOUR TEAM NOW” Action: open the official
+Google Form in a new tab. Google Form URL must be configurable. Do not
+fabricate a URL. If not supplied, show a clearly marked placeholder or
+disable CTA and show “Registration details will be announced soon.” Do
+not collect/store registration locally or imply backend submission.
+Visual: large dark arcade terminal, subtle grid texture, neon borders,
+Level 00 badge, coin/insert-slot motif, Player ID/team-registration
+concept, prominent CTA. Optional secondary CTA “READY TO PLAY?” may link
+to registration or Gallery, but keep registration CTA dominant.
+
+SECTION 14 — FOOTER / QUICK LINKS / CONNECT Column 1 SPECTEQ: logo and
+description “Empowering the next generation of robotics innovators
+through hands-on learning and competition.” Column 2 QUICK LINKS: About,
+Missions/Categories, Journey, Timeline, Rewards, Rules, FAQ,
+Registration, Gallery (separate page). Column 3 RESOURCES: Official
+Rules, FAQs, Gallery, Registration, official documents if available.
+Column 4 CONNECT: Instagram, LinkedIn, YouTube, official email, official
+phone if supplied. All social/contact URLs configurable. Do not invent
+accounts or contacts; hide unavailable links or mark them configurable.
+Bottom: copyright SpecteQ 2027. Optional tagline “Built for Players.
+Powered by Innovation.” Avoid fake privacy/terms links.
+
+FUNCTIONAL REQUIREMENTS - Sticky navigation and smooth scrolling. -
+Gallery route/page is separate. - Responsive mobile menu. - Hero CTA
+scrolls to registration; Explore Missions scrolls to categories. -
+Category cards are clickable and have meaningful action. - Category
+comparison responsive. - Journey stages selectable. - Level cards update
+detail panel. - Technology motion is subtle and can be disabled for
+reduced motion. - Timeline cards may expand. - Rules and FAQ accordions
+work. - Contact Committee action works using configured contact
+details. - Registration button opens official Google Form. - All
+links/buttons must work; no decorative dead buttons.
+
+RESPONSIVE AND ACCESSIBILITY Desktop: cinematic hero, grids, horizontal
+timeline/journey where appropriate. Tablet: reflow grids and keep
+spacing readable. Mobile: scalable title, stacked CTAs/cards, compact
+nav, vertical journey/timeline, stacked comparison cards, no horizontal
+overflow, large tap targets. Accessible contrast, keyboard navigation,
+focus states, labelled controls, alt text, reduced-motion support. Do
+not communicate status only through colour.
+
+FACTUAL DATA RULES White website reference is the source for factual
+content: categories, category descriptions, team sizes/eligibility,
+registration fees/details, prizes, rules, and contact information. Retro
+SpecteQ theme/concept reference is the source for terminology,
+narrative, level progression, and game-style visual language. Rules
+reference is the source for rule-section structure and accordion format.
+Do not invent official details. Unconfirmed information must be labelled
+TBD / To Be Announced / Pending Official Confirmation and kept
+configurable.
+
+IMPLEMENTATION NOTES FOR THE FUTURE AGENT Use reusable components for
+cards, section headers, accordions, timeline nodes, journey stages,
+category cards, and CTA panels. Store content and configurable values
+centrally where practical: form URL, contacts, socials, schedule,
+prizes, category data, rules. Reuse the existing project framework and
+package setup; do not unnecessarily replace project structure. Do not
+import code/dependencies from the reference website. Do not fake
+backend, registration, login, progress, or leaderboard functionality.
+Ensure assets load and test all routes, buttons, responsive layouts, and
+scrolling.
+
+FINAL EXPERIENCE GOAL Visitor journey: SEE THE GAME → UNDERSTAND SPECTEQ
+→ EXPLORE THREE MISSIONS → COMPARE/CHOOSE → UNDERSTAND JOURNEY →
+DISCOVER TECHNOLOGIES → SEE TIMELINE/REWARDS → READ RULES → INSERT COIN
+→ REGISTER TEAM. The page should feel like a premium robotics arcade:
+cinematic, immersive, modern, readable, responsive, and unmistakably
+SpecteQ 2027. Gallery remains a separate page.

@@ -1,0 +1,8 @@
+{
+  "name": "SpecteQ 2027",
+  "description": "SpecteQ 2027 Robotics & Engineering Competition — Engineer, Innovate, Compete. Official competition platform, participant portal, gallery, and arena leaderboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

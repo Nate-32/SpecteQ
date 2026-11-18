@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpecteQ 2027 – Engineer, Innovate, Compete | Robotics Arena</title>
+    <meta
+      name="description"
+      content="Enter the SpecteQ 2027 robotics and engineering arena. Choose your mission in Line Follower, Maze Solver, or Self Balancing and compete for the championship."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SpecteQ 2027" />
+    <meta property="og:title" content="SpecteQ 2027 – Engineer, Innovate, Compete | Robotics Arena" />
+    <meta
+      property="og:description"
+      content="Enter the SpecteQ 2027 robotics and engineering arena. Choose your mission in Line Follower, Maze Solver, or Self Balancing and compete for the championship."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SpecteQ 2027 – Engineer, Innovate, Compete" />
+    <meta
+      name="twitter:description"
+      content="Hands-on robotics competition: learn, build, test, and compete in the SpecteQ 2027 Robotics Arena."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "SpecteQ 2027 Robotics Competition",
+        "description": "An inclusive hands-on robotics and engineering competition featuring Line Follower, Maze Solver, and Self Balancing challenges.",
+        "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "organizer": {
+          "@type": "Organization",
+          "name": "SpecteQ Organizing Committee"
+        }
+      }
+    </script>
+    <script>
+      // GitHub Pages SPA fallback route restoration
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+  </head>
+  <body class="bg-[#060913] text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-100">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,999 @@
+# SPECTEQ 2027 — STUDENT PORTAL / PARTICIPANT DASHBOARD
+
+## OBJECTIVE
+
+Develop a complete, functional, authenticated Student Portal for SpecteQ 2027 participants.
+
+The Student Portal is the interface through which registered teams manage their participation, access learning resources, complete competition stages, take quizzes, submit assignments, monitor progress, view schedules, receive announcements, and communicate with organizers.
+
+This is a separate section from:
+
+1. The public SpecteQ website.
+2. The Admin Panel.
+3. The main website leaderboard.
+
+The Student Portal should use a clean, professional, modern dashboard design inspired by the provided screenshots.
+
+---
+
+# 1. STUDENT PORTAL LAYOUT
+
+Create a responsive dashboard layout consisting of:
+
+### Sidebar Navigation
+
+- Dashboard
+- Team Members
+- Task Materials
+- Active Stages / Tasks
+- Competition Schedule
+- Announcements
+- Team Profile / Settings
+- Contact Support
+- Logout
+
+The sidebar should be collapsible on desktop and become a drawer on mobile.
+
+The sidebar should dynamically display active stages/tasks based on the configuration and activation status set by the administrator.
+
+### Top Navigation Bar
+
+Include:
+
+- Current page title
+- Team name
+- Notification bell
+- Unread notification count
+- User profile menu
+- Profile settings
+- Logout option
+
+Use a consistent navigation structure across all student pages.
+
+---
+
+# 2. STUDENT DASHBOARD
+
+The Dashboard is the primary landing page after authentication.
+
+## Welcome Section
+
+Display:
+
+- Personalized welcome message
+- Team name
+- Team ID
+- Current competition phase
+- Overall competition progress
+
+## Progress Cards
+
+Create dashboard cards for:
+
+### Registration
+
+Display registration completion status.
+
+### Payment
+
+Display payment verification status.
+
+### Team Profiles
+
+Display the number of completed team profiles versus total team members.
+
+### Current Stage
+
+Display the currently active stage/task.
+
+### Tasks
+
+Display completed tasks versus total assigned tasks.
+
+### Quiz Performance
+
+Display latest quiz score or overall quiz performance, when applicable.
+
+Cards should use clear status indicators:
+
+- Completed
+- Active
+- Pending
+- Overdue
+- Locked
+- Under Review
+
+## Competition Progress Tracker
+
+Display the competition progression as a visual tracker.
+
+Example:
+
+Registration → Stage 0 → Stage 1 → Stage 2 → Stage 3 → Final Competition
+
+Each stage should have a status:
+
+- Locked
+- Upcoming
+- Active
+- Submitted
+- Under Evaluation
+- Completed
+
+The progression should update automatically based on data and stage completion conditions.
+
+## Current Mission / Continue Task
+
+Create a prominent section showing the student's current task.
+
+Display:
+
+- Stage number
+- Stage name
+- Task title
+- Completion percentage
+- Deadline
+- Current status
+- Continue button
+
+The Continue button should take the participant directly to the relevant active task page.
+
+## Upcoming Deadlines
+
+Show upcoming:
+
+- Quiz deadlines
+- Assignment deadlines
+- Task deadlines
+- Important sessions
+- Stage completion dates
+
+Highlight urgent deadlines.
+
+## Recent Activity
+
+Display a timeline of recent activity, such as:
+
+- New stage activated
+- New material uploaded
+- Quiz completed
+- Submission received
+- Feedback received
+- Announcement published
+
+## Quick Actions
+
+Provide shortcuts to:
+
+- Current Stage
+- Task Materials
+- Team Members
+- Competition Schedule
+- Contact Support
+
+---
+
+# 3. TEAM MEMBERS PAGE
+
+Display all members associated with the registered team.
+
+Each member card should contain:
+
+- Name
+- Profile picture or initials
+- Role
+- Team Leader / Member designation
+- Email
+- Institution
+- Profile completion status
+
+Highlight the Team Leader.
+
+Allow authorized users to:
+
+- View team information
+- View member details
+- Edit permitted team information
+- Manage members if permitted
+- Check profile completion
+- Contact organizers
+
+Display team profile completion status, for example:
+
+4 / 5 Members Completed Profiles.
+
+Member management permissions must be configurable and controlled by the system.
+
+---
+
+# 4. TASK MATERIALS PAGE
+
+Create a centralized learning-resource library.
+
+Organize resources by stage:
+
+- Stage 0
+- Stage 1
+- Stage 2
+- Stage 3
+- Additional stages dynamically created by the administrator
+
+Each stage should have an expandable/collapsible resource section.
+
+## Supported Resource Types
+
+- PDF Documents
+- Documents
+- Presentations
+- Videos
+- External Links
+- Code Files
+- ZIP Files
+- Images
+- Assignments
+- Quizzes
+
+Each resource card should display:
+
+- Resource title
+- Description
+- Resource type
+- Associated stage
+- Date added, when available
+- Access button
+
+Buttons should be appropriate for the resource:
+
+- Open Document
+- Download
+- Watch Video
+- Open Resource
+- Start Assignment
+- Start Quiz
+
+## Additional Features
+
+- Search resources
+- Filter by stage
+- Filter by resource type
+- Recently added resources
+- Mark resource as completed/read, when enabled
+- Display completion status
+
+All materials must be dynamically populated from the admin-managed database.
+
+Students must not access unpublished, restricted, or unauthorized materials.
+
+---
+
+# 5. DYNAMIC STAGE AND TASK SYSTEM
+
+THIS IS A CORE FUNCTIONALITY OF THE STUDENT PORTAL.
+
+The administrator should be able to create, configure, publish, activate, deactivate, and manage stages/tasks through the Admin Panel.
+
+When the administrator activates a stage/task, it should automatically become accessible to the appropriate participants through their Student Portal.
+
+Do not manually hardcode individual stage pages.
+
+Instead, create a reusable dynamic Stage/Task Page template.
+
+Each stage/task should be populated using the information configured in the Admin Panel.
+
+## Stage Configuration Should Support
+
+- Stage number
+- Stage title
+- Task title
+- Description
+- Start date
+- Deadline
+- Guidelines
+- Learning materials
+- Quiz
+- Assignments
+- Submission requirements
+- Evaluation criteria
+- Completion requirements
+- Visibility
+- Activation status
+- Unlock conditions
+- Attempt limits
+- Passing criteria
+
+The system should support any number of stages.
+
+## Sidebar Behavior
+
+When a stage is activated:
+
+- It becomes accessible to eligible students.
+- It appears in the Student Portal navigation.
+- Students can open the corresponding stage page.
+- The stage status is displayed.
+
+When a stage is inactive or unpublished:
+
+- It should remain inaccessible.
+- It may be displayed as locked/upcoming if configured by the administrator.
+
+The student portal must dynamically update when the administrator changes the stage status.
+
+---
+
+# 6. STAGE / TASK PAGE STRUCTURE
+
+Every stage should use a consistent page template.
+
+## A. Stage Overview
+
+Display:
+
+- Stage number
+- Stage title
+- Task name
+- Description
+- Status badge
+- Start date
+- Deadline
+- Estimated duration, if configured
+- Progress percentage
+- Completion status
+
+Provide an appropriate Start / Continue button.
+
+## B. GUIDELINES / INSTRUCTIONS
+
+Display the official stage guidelines configured by the administrator.
+
+Guidelines may include:
+
+- Task instructions
+- Rules
+- Requirements
+- Technical specifications
+- Safety instructions
+- Expected outcomes
+- Evaluation criteria
+- Important notices
+
+Support rich content:
+
+- Headings
+- Paragraphs
+- Bullet lists
+- Numbered lists
+- Images
+- Links
+- Embedded videos
+- Documents
+- Downloadable files
+
+Create a clear Guidelines section.
+
+Students should be able to review the instructions before beginning the quiz or assignment.
+
+## C. STAGE-SPECIFIC MATERIALS
+
+Display only the materials associated with that particular stage.
+
+For example:
+
+Stage 1 Materials:
+
+- Introduction to PID
+- Arduino Nano & MPU6050 Simulation
+- Introduction to Wokwi
+- Technical Documentation
+
+Resources should be accessible directly from the stage page.
+
+The centralized Task Materials page should still contain the complete resource library, while the stage page should contain only relevant stage-specific materials.
+
+## D. QUIZ SYSTEM
+
+Each stage should be able to contain an administrator-configured quiz.
+
+### Quiz Information
+
+Display:
+
+- Quiz title
+- Description
+- Number of questions
+- Total marks
+- Passing score
+- Time limit, if applicable
+- Number of attempts allowed
+- Quiz instructions
+- Start Quiz button
+
+### Supported Question Types
+
+- Single-choice questions
+- Multiple-choice / multiple-select questions
+- True or False
+- Short-answer questions
+- Numerical questions
+- Image-based questions
+
+### Quiz Interface
+
+The quiz interface should support:
+
+- Question navigation
+- Previous / Next buttons
+- Question progress
+- Answer selection
+- Automatic saving of answers
+- Mark for review
+- Question status indicators
+- Timer, if applicable
+- Submit button
+
+The student should be able to review their answers before submitting, if permitted.
+
+### Quiz Submission
+
+Before final submission, show a confirmation message.
+
+After submission, display:
+
+- Submission confirmation
+- Attempt number
+- Submission timestamp
+- Score, if automatically evaluated
+- Pass / Fail status
+- Correct answers, if allowed
+- Feedback, if available
+
+### Quiz Configuration
+
+The administrator should be able to configure:
+
+- Attempt limit
+- Time limit
+- Passing score
+- Question order randomization
+- Answer option randomization
+- Auto-evaluation
+- Manual evaluation
+- Reveal correct answers
+- Show score immediately
+- Best score or latest score policy
+
+Students should be able to view their attempt history when permitted.
+
+## E. ASSIGNMENTS / SUBMISSIONS
+
+Stages should optionally include practical assignments.
+
+Display:
+
+- Assignment title
+- Task description
+- Instructions
+- Accepted file formats
+- Maximum file size
+- Deadline
+- Submission status
+- Feedback
+- Evaluation status
+
+### Supported Submission Types
+
+- File upload
+- PDF
+- Images
+- ZIP
+- Source code
+- Multiple files
+- Text response
+- External links
+- GitHub links
+- Google Drive links
+- Video links
+
+### Submission Statuses
+
+- Not Started
+- In Progress
+- Submitted
+- Late Submission
+- Under Review
+- Accepted
+- Rejected
+- Revision Required
+
+Students should be able to:
+
+- Submit assignments
+- View submissions
+- Replace/update submissions when permitted
+- View submission history
+- View feedback
+- Resubmit when permitted
+
+The administrator should be able to control whether resubmission is allowed.
+
+## F. STAGE COMPLETION
+
+Stage completion requirements should be configurable.
+
+Possible requirements:
+
+- Guidelines reviewed
+- Required materials completed
+- Quiz passed
+- Assignment submitted
+- Assignment approved
+- Other administrator-defined requirements
+
+When requirements are satisfied:
+
+- Mark the stage completed.
+- Update the student's overall progress.
+- Update dashboard progress cards.
+- Unlock the next stage when appropriate.
+
+Do not assume every stage must contain a quiz or assignment.
+
+Stages should support flexible configurations.
+
+---
+
+# 7. COMPETITION SCHEDULE PAGE
+
+Create a complete schedule and deadline management interface.
+
+## Filters
+
+- All Tasks
+- Registration
+- Learning Phase
+- Implementation
+- Final Phase
+
+The categories should be configurable.
+
+## Schedule Cards
+
+Each card should contain:
+
+- Event/task title
+- Description
+- Category
+- Start date
+- End date/deadline
+- Duration
+- Status
+
+## Statuses
+
+- Upcoming
+- Active
+- Completed
+- Deadline Passed
+- Cancelled
+
+## Schedule Views
+
+Support:
+
+- List View
+- Calendar View, if feasible
+- Timeline View, if feasible
+
+The list view should be the primary/default view.
+
+Schedule changes made by administrators should automatically update the student schedule.
+
+Highlight upcoming deadlines.
+
+---
+
+# 8. ANNOUNCEMENTS PAGE
+
+Create a dedicated page for official announcements.
+
+Each announcement should display:
+
+- Title
+- Content
+- Published date
+- Category
+- Priority
+- Attachments
+
+## Categories
+
+- General
+- Important
+- Schedule Update
+- Task Update
+- Technical Notice
+- Deadline Reminder
+
+## Priority
+
+- Normal
+- Important
+- Urgent
+
+Urgent announcements should be highlighted and may appear as a dashboard banner.
+
+Announcements must be dynamically loaded from the Admin Panel.
+
+---
+
+# 9. NOTIFICATION SYSTEM
+
+Add a notification bell to the top navigation.
+
+Notifications should be triggered by events such as:
+
+- Stage activated
+- New materials uploaded
+- Quiz available
+- Deadline approaching
+- Quiz submitted
+- Quiz evaluated
+- Assignment submitted
+- Assignment feedback received
+- Submission accepted/rejected
+- Announcement published
+- Schedule updated
+- Team profile incomplete
+
+## Notification Functionality
+
+- Unread notification count
+- Notification list
+- Mark as read
+- Mark all as read
+- Notification history
+- Clicking notification navigates to the relevant page
+
+---
+
+# 10. TEAM PROFILE AND SETTINGS
+
+Create a page containing:
+
+## Team Information
+
+- Team name
+- Team ID
+- Institution
+- Competition category
+- Team leader
+- Team members
+- Registration details
+
+## Account Settings
+
+- User profile
+- Email
+- Password change
+- Profile picture
+- Notification preferences
+
+Only authorized users should be able to edit sensitive or team-level information.
+
+---
+
+# 11. CONTACT SUPPORT
+
+Create a dedicated support page.
+
+## Support Information
+
+Display official contact information.
+
+Include:
+
+- FAQs
+- Contact organizers
+- Support request form
+
+## Support Request Form
+
+Fields:
+
+- Subject
+- Category
+- Description
+- Attachments
+
+Categories:
+
+- Registration
+- Payment
+- Technical Issue
+- Quiz / Task
+- Schedule
+- General Query
+
+Students should be able to track their support request.
+
+Statuses:
+
+- Submitted
+- In Progress
+- Resolved
+
+---
+
+# 12. STUDENT DASHBOARD ADDITIONAL FEATURES
+
+Include:
+
+## Continue Where You Left Off
+
+Display the currently active task prominently.
+
+## Upcoming Deadlines
+
+Display important upcoming deadlines.
+
+## Activity Timeline
+
+Display recent student/team activity.
+
+## Team Progress
+
+Show:
+
+- Overall progress
+- Stage completion
+- Task completion
+- Quiz completion
+- Team profile completion
+
+## Quick Actions
+
+Provide quick access to:
+
+- Current Stage
+- Materials
+- Team Members
+- Schedule
+- Support
+
+---
+
+# 13. LEADERBOARD
+
+The leaderboard is planned to be hosted on the MAIN PUBLIC SPECTEQ WEBSITE.
+
+Therefore:
+
+- Do NOT create a dedicated leaderboard page inside the Student Portal navigation.
+- Do NOT duplicate the public leaderboard inside the student dashboard.
+- Do NOT make the student portal responsible for displaying the main leaderboard.
+
+The Student Portal may display individual/team performance statistics and stage scores privately, but the public competition leaderboard will be handled separately by the main website.
+
+---
+
+# 14. UI / UX DESIGN
+
+Use the provided screenshots as a design reference.
+
+## Design Style
+
+- Professional dashboard
+- Clean and minimal
+- Modern
+- Easy to navigate
+- Responsive
+- Consistent spacing
+- Clear information hierarchy
+
+## Colors
+
+Use the existing purple/white dashboard design:
+
+- Deep purple sidebar
+- Purple active navigation
+- White content cards
+- Light gray background
+- Purple primary buttons
+- Light purple icon backgrounds
+
+Status colors:
+
+- Green = Completed
+- Blue = Active / In Progress
+- Yellow / Orange = Warning / Deadline
+- Red = Error / Overdue
+- Gray = Locked / Inactive
+
+## Components
+
+Use consistent:
+
+- Cards
+- Buttons
+- Badges
+- Tables
+- Forms
+- Modals
+- Tabs
+- Accordions
+- Progress bars
+- Status indicators
+
+Avoid unnecessary visual clutter.
+
+## Responsive Design
+
+The portal must work properly on:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+On mobile:
+
+- Sidebar becomes a drawer
+- Cards stack vertically
+- Tables become responsive
+- Quiz interface remains usable
+- Buttons are touch-friendly
+- Forms are mobile-friendly
+
+---
+
+# 15. FUNCTIONAL REQUIREMENTS
+
+This must be a functional application, not merely a static UI.
+
+Implement:
+
+- Authentication
+- Role-based access control
+- Team-based data access
+- Dynamic stage loading
+- Dynamic task loading
+- Dynamic materials loading
+- Quiz functionality
+- Quiz submissions
+- Assignment submissions
+- Progress tracking
+- Schedule data
+- Announcements
+- Notifications
+- Team profiles
+- Support requests
+
+All information should be connected to the backend/database.
+
+Do not hardcode demonstration data as the permanent application behavior.
+
+Use mock/demo data only during development when necessary, and clearly separate it from the actual data layer.
+
+---
+
+# 16. DATA AND PERMISSIONS
+
+Students should only be able to access:
+
+- Their own account
+- Their registered team
+- Their team's submissions
+- Their team's progress
+- Authorized stage/task content
+- Published announcements
+- Publicly accessible schedule information
+
+Students must not be able to:
+
+- Access the Admin Panel
+- Modify administrator-controlled stage content
+- Modify quiz questions
+- View other teams' private submissions
+- View private evaluation data belonging to other teams
+- Modify scores
+- Access unpublished materials
+- Bypass stage restrictions
+
+Implement secure backend permissions rather than relying only on frontend visibility.
+
+---
+
+# 17. ADMIN PANEL INTEGRATION
+
+The Student Portal must integrate with the Admin Panel.
+
+The administrator should be able to control:
+
+- Student visibility
+- Stage activation
+- Stage content
+- Guidelines
+- Materials
+- Quiz creation
+- Quiz questions
+- Quiz settings
+- Assignments
+- Submission requirements
+- Deadlines
+- Evaluation
+- Feedback
+- Announcements
+- Schedule
+- Notifications
+- Completion requirements
+
+When the administrator publishes or activates something, the student interface should update accordingly.
+
+The student portal should use the same database and backend system as the Admin Panel.
+
+Do not create disconnected or duplicated databases.
+
+---
+
+# 18. IMPLEMENTATION PRIORITY
+
+Build the Student Portal in this order:
+
+### Phase 1 — Core Portal
+
+- Authentication
+- Dashboard
+- Sidebar/navigation
+- Team Members
+- Task Materials
+- Schedule
+- Profile
+
+### Phase 2 — Dynamic Stage System
+
+- Stage pages
+- Stage activation
+- Guidelines
+- Stage materials
+- Progress tracking
+- Stage locking/unlocking
+
+### Phase 3 — Assessment System
+
+- Quiz interface
+- Quiz submission
+- Auto-evaluation
+- Attempt history
+- Assignment submission
+- Feedback
+
+### Phase 4 — Communication
+
+- Announcements
+- Notifications
+- Support requests
+
+### Phase 5 — Refinement
+
+- Responsive design
+- Loading states
+- Error states
+- Empty states
+- Validation
+- Security
+- Testing
+- Performance
+
+---
+
+# FINAL REQUIREMENT
+
+The Student Portal must feel like a complete participant platform where teams can manage their entire SpecteQ journey from registration to final competition.
+
+It should not be a collection of disconnected static pages.
+
+Every page must be connected through a consistent navigation system, and all stages, tasks, materials, quizzes, deadlines, announcements, and progress should be dynamically managed by the Admin Panel.
+
+Use the provided screenshots as UI references, but improve the overall design, functionality, responsiveness, and user experience.
+
+Keep the public leaderboard on the main SpecteQ website and do not include it in the Student Portal navigation.

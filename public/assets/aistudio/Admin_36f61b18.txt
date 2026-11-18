@@ -1,0 +1,737 @@
+. Admin Panel — Overall Layout
+
+
+
+
+
+
+
+
+
+
+Persistent Sidebar Navigation
+- Dashboard
+- Teams
+- Schedule
+- Leaderboard
+- Quiz
+- Content
+- Live Sessions
+- Notifications
+- Logout
+
+
+
+
+
+
+
+
+
+
+
+
+Top Navigation Bar
+- Page title
+- Budget button
+- Admin email / account identifier
+- Profile button
+- Sidebar toggle
+
+
+
+Layout behaviour
+- Sidebar should remain accessible throughout the admin panel.
+- Sidebar menu groups can expand/collapse.
+- Main content changes according to the selected section.
+- Responsive layout for laptop, tablet and mobile.
+- Sidebar should collapse into a mobile drawer.
+- Logout button remains accessible at the bottom.
+- Admin pages should be protected against unauthorized access.
+
+2. Dashboard
+Purpose
+The dashboard provides a quick overview of the competition's current status.
+Visible statistics
+Statistic	Description
+Total Teams	Total registered/created teams
+Active Teams	Teams currently active
+Pending	Teams awaiting activation/approval, if applicable
+
+Dashboard functionality
+- Display key statistics using cards.
+- Team counts should be fetched dynamically from the database.
+- Cards should update when teams are created, edited, activated or removed.
+- Provide a quick navigation entry point to major admin functions.
+- Potential future addition: competition stage status, upcoming deadlines and recent activity.
+
+3. Team Management
+Team management has two subsections:
+1. Register Team
+2. All Teams
+3.1 Register Team — Create Team
+This is an admin-only operation. Participants cannot create their own teams through the admin functionality.
+Team registration fields
+Field	Type	Requirement
+Team Name	Text	Required, unique
+Number of Members	Number	Configurable
+Robot Theme / Category	Dropdown	Select from available competition categories
+Member 1 Name	Text	Required
+Member 1 Email	Email	Required
+Member 2 Name	Text	Required
+Member 2 Email	Email	Required
+Additional Members	Dynamic fields	Based on member count
+
+The member fields dynamically increase/decrease according to the selected number of members.
+Team creation flow
+1. Admin opens Register Team.
+2. Admin enters the team name.
+3. Admin selects the number of members.
+4. Admin selects the team's robot category/theme.
+5. Member information fields are dynamically generated.
+6. Admin enters member names and emails.
+7. Admin submits the registration.
+8. The system creates the team record.
+9. The system creates team login credentials.
+10. The admin receives/displays the generated credentials.
+11. The credentials are handed to the team manually.
+Credentials
+The reference shows an intended credential format similar to:
+- Username: teamname
+- Email/login identifier: team-based identifier
+- Password: generated password
+Recommended implementation: generate a unique username and a temporary random password. Passwords should never be stored in plaintext. Supabase Auth should handle authentication.
+
+The admin should ideally have a Copy Credentials button and a one-time password display.
+Important team restrictions
+- Only admins can create teams.
+- Team names should be unique.
+- Login credentials should be unique.
+- A team should have one account.
+- Team information should be editable by admins.
+- Admins should be able to deactivate a team.
+- Admins should be able to reset team passwords.
+- Deleting a team should require confirmation.
+- Team members should not be able to create additional accounts or teams.
+
+3.2 All Teams
+A management table containing every registered team.
+Suggested table columns
+Column	Description
+Team ID	Unique identifier
+Team Name	Name of the team
+Category	Selected robotics category
+Members	Member count
+Status	Active / Disabled
+Created Date	Team creation timestamp
+Actions	View / Edit / Reset Credentials / Disable / Delete
+
+Functionalities
+- Search teams by name.
+- Filter by category.
+- Filter by active/inactive status.
+- Sort by name, date, category.
+- Pagination.
+- View complete team details.
+- Edit team details.
+- Change robot category.
+- Add/remove members.
+- Reset login credentials.
+- Activate/deactivate team.
+- Delete team with confirmation.
+Team detail page
+Opening a team should display:
+- Team name
+- Team ID
+- Login username
+- Category
+- Members
+- Email addresses
+- Account status
+- Creation date
+- Competition progress
+- Current stage
+- Quiz scores
+- Leaderboard scores
+- Assigned content
+- Activity history, if implemented
+
+4. Schedule Management
+The Schedule section allows the admin to create and manage competition tasks, sessions, deadlines and activities.
+Main functionality
+- Add Task
+- Edit Task
+- Delete Task
+- View all scheduled tasks
+- Define task duration
+- Set start date
+- Set end date
+- Add descriptions
+- Organize the competition timeline
+Task creation form
+Field	Description
+Task Title	Name of the event/task
+Description	Detailed instructions or explanation
+Duration	Days, weeks or custom duration
+Start Date	Task start date
+End Date	Task end date
+
+Example schedule entries
+- Inauguration Ceremony
+- Structured Technical Training Program
+- Stage 1: Event-wise Sessions
+- Hardware Implementation & Bot Development
+- Hardware Kit Setup and Distribution
+- Competition Preparation
+- Final Robotics Arena
+These are examples visible in the reference screenshots, not necessarily the finalized SpecteQ 2027 schedule.
+Task card
+Each task should display:
+- Task name
+- Description
+- Duration
+- Start date
+- End date
+- Delete button
+- Edit functionality
+Expected behaviour
+- Admin can create multiple tasks.
+- Tasks can overlap.
+- Tasks can be reordered if required.
+- The public/team timeline should read from the same backend schedule.
+- Tasks should be editable without redeploying the website.
+
+5. Leaderboard Management
+This section allows the admin to manually assign, update and remove scores for teams.
+Interface
+- Stage selector
+- Add/Update Score form
+- Team search
+- Score input
+- Update Score button
+- Stage-specific leaderboard table
+Score update form
+Field	Description
+Stage	Selected competition stage
+Team	Search/select team
+Score	Numeric score
+
+Leaderboard table
+Column	Description
+Rank	Automatically calculated
+Team	Team name
+Score	Current score for selected stage
+Actions	Remove entry
+
+Functionality
+- Select a stage.
+- Search teams.
+- Add a score.
+- Update an existing score.
+- Remove a score entry.
+- Automatically rank teams.
+- Display highest scores first.
+- Recalculate rankings after score changes.
+- Support ties.
+- Maintain separate score records per stage.
+Important design recommendation
+Scores should not simply be stored as manually assigned ranks.
+
+The backend should store actual numeric scores, and ranking should be calculated automatically:
+
+Rank = ordered position based on score
+
+This ensures rankings remain consistent when scores change.
+
+6. Quiz Management
+The Quiz section contains three subsections:
+1. Questions
+2. Settings
+3. Results
+This is one of the most important sections because the reference includes a complete question bank and stage-wise quiz control system.
+
+6.1 Quiz Questions — Question Bank
+The admin should be able to create questions independently and later select which questions belong to a particular stage's quiz.
+Question creation
+Potential fields based on the functionality implied by the reference:
+Field	Description
+Question	Question text
+Question Type	MCQ
+Option A	Answer choice
+Option B	Answer choice
+Option C	Answer choice
+Option D	Answer choice
+Correct Answer	Admin-selected correct option
+Explanation	Optional explanation
+Points	Optional default score
+Category	Optional topic/category
+Difficulty	Optional difficulty level
+
+Question bank functionality
+- Add new questions.
+- Edit existing questions.
+- Delete questions.
+- Search questions.
+- Filter questions.
+- View all available questions.
+- Store questions independently from quizzes.
+Quiz assembly
+Admin should be able to:
+1. Select a stage.
+2. Open the question bank.
+3. Browse available questions.
+4. Select questions to include.
+5. Add selected questions to that stage's quiz.
+6. Remove questions from the stage quiz.
+7. Rearrange question order.
+8. Save the quiz configuration.
+Critical distinction: Creating a question does not automatically add it to a quiz. Questions must be selected and assigned to the relevant stage.
+
+6.2 Quiz Settings
+This page controls the availability and configuration of each stage's quiz.
+
+The screenshot shows stage-wise settings.
+Stage configuration
+Setting	Description
+Stage	Stage 0 / Stage 1 / Stage 2, etc.
+Status	Current quiz state
+Mode	Scheduled or Manual
+Enabled	Toggle quiz availability
+Questions	Number of questions
+Points/Q	Points awarded per question
+
+Example configuration
+Stage	Mode	Enabled	Questions	Points/Question
+Stage 0	Scheduled	Off	15	2
+Stage 1	Manual	Off	5	2
+Stage 2	Manual	Off	5	2
+
+These are example values from the reference, not final competition settings.
+Quiz scheduling
+Each stage can have a schedule.
+Field	Description
+Use Schedule	Enable automatic scheduling
+Start Date/Time	Quiz activation time
+End Date/Time	Quiz closing time
+Save Schedule	Save configuration
+
+Quiz modes
+Scheduled Mode
+- Admin defines start and end date/time.
+- Quiz automatically becomes available at the configured start.
+- Quiz automatically closes at the configured end.
+- Stage status is controlled by the schedule.
+Manual Mode
+- Admin manually enables the quiz.
+- Admin manually disables the quiz.
+- The quiz remains controlled by the admin.
+Quiz controls
+- Enable/disable a stage quiz.
+- Change quiz mode.
+- Configure number of questions.
+- Configure points per question.
+- Configure start/end time.
+- Save schedule.
+- Prevent users from accessing inactive quizzes.
+- Prevent quiz access outside the scheduled period.
+Recommended additional settings
+Although not clearly visible in the screenshots, these should be considered for the actual system:
+- Quiz duration.
+- Maximum attempts.
+- Random question order.
+- Random answer order.
+- Whether questions can be revisited.
+- Auto-submit when time expires.
+- Negative marking.
+- Show correct answers after submission.
+- Result visibility.
+- Prevent duplicate submissions.
+
+6.3 Quiz Results
+This section allows the admin to monitor quiz submissions and scores.
+Filters
+- Stage
+- Status
+Results table
+Column	Description
+Team Name	Team that submitted
+Theme	Team's robot category
+Stage	Quiz stage
+Score	Percentage or score
+Correct	Number of correct answers
+Status	Completed / Pending / etc.
+Completed At	Submission timestamp
+Actions	View Details
+
+Functionality
+- Filter results by stage.
+- Filter results by status.
+- View all submissions.
+- View score.
+- View correct answers count.
+- View completion timestamp.
+- Open individual result details.
+Result detail page
+Should ideally show:
+- Team name
+- Stage
+- Quiz score
+- Total possible score
+- Correct answers
+- Incorrect answers
+- Questions
+- Team's selected answers
+- Correct answers
+- Submission time
+- Time taken
+
+7. Content Management
+The Content sidebar contains three subsections:
+1. Task Materials
+2. Stage Content
+3. Stage 3 Event
+4. Submission
+The exact content fields are not visible in the screenshots, but their intended functionality is clear from their labels and placement.
+
+7.1 Task Materials
+Admin-managed resources available to participants.
+Content types
+- PDF documents
+- Documents
+- Images
+- Video links
+- Google Drive links
+- External websites
+- Tutorials
+- Software download links
+- Hardware documentation
+- Reference material
+Admin functionality
+- Upload material.
+- Add external links.
+- Add title.
+- Add description.
+- Assign material to a stage.
+- Assign material to a category.
+- Edit material.
+- Delete material.
+- Enable/disable material.
+- Reorder materials.
+Participant-facing behaviour
+Teams should be able to:
+- View available materials.
+- Download files.
+- Open external resources.
+- See materials assigned to their current stage.
+- See when new materials become available.
+
+7.2 Stage Content
+This section should be used to manage stage-specific information.
+Potential content fields
+Field	Description
+Stage	Stage number/name
+Title	Content title
+Description	Stage instructions
+Content	Rich text / formatted instructions
+Attachments	Documents/images
+External Links	Learning resources
+Status	Draft / Published
+Visibility	Whether teams can access it
+
+Functionality
+- Create stage content.
+- Edit content.
+- Assign it to a stage.
+- Upload attachments.
+- Add external links.
+- Publish/unpublish.
+- Control visibility.
+- Organize content into sections.
+Example
+Stage 0:
+- Introduction
+- Basic robotics concepts
+- Learning resources
+- Workshop instructions
+- Quiz information
+Stage 1:
+- Event-specific technical information
+- Simulation resources
+- Rules
+- Tutorials
+Stage 2:
+- Hardware documentation
+- Component information
+- Build instructions
+- Technical requirements
+These are examples of how the system can be structured, not final stage content.
+
+7.3 Stage 3 Event
+This appears to be a dedicated management section for a specific competition stage/event.
+
+Because it is separate from general Stage Content, it should support event-specific controls.
+Potential functionality
+- Event title
+- Description
+- Event instructions
+- Rules
+- Start/end time
+- Venue
+- Category information
+- Required documents
+- Event-specific resources
+- Registration/participation status
+- Published/unpublished state
+The exact implementation should be finalized after reviewing the participant-facing panel.
+
+7.4 Submission
+The reference has a dedicated Submission section.
+
+This suggests the system may eventually support:
+- Submission instructions
+- Submission links
+- Team project submissions
+- Files
+- URLs
+- Submission deadlines
+- Submission status
+- Admin review
+Since submissions have not yet been finalized in the architecture, this section can initially be implemented as a configurable content/management section, with actual submission functionality added later.
+
+8. Live Sessions
+The Live Sessions section is designed to manage online sessions, particularly Google Meet links.
+Structure
+Live sessions are organized by:
+- Stage
+- Competition category / robot type
+The screenshot shows multiple cards under each stage.
+Example structure
+Stage 0 Live Sessions
+- Line Follower
+- Maze Solver
+- Self Balancing
+Stage 1 Live Sessions
+- Line Follower
+- Maze Solver
+- Self Balancing
+These are examples from the reference interface.
+Session card fields
+Field	Description
+Category	Robot/event category
+Enabled	Toggle
+Session Title	Display name
+Meeting Link	Google Meet URL
+Description	Session description
+Date	Session date
+Time	Session time
+Save	Save configuration
+
+Functionality
+- Enable/disable a session.
+- Edit session title.
+- Add Google Meet link.
+- Edit description.
+- Set date.
+- Set time.
+- Save session.
+- Refresh session information.
+Participant-facing behaviour
+If a session is enabled, the appropriate team should see:
+- Session title
+- Date
+- Time
+- Description
+- Join Live Session button
+If disabled, the join button should not be visible.
+Important
+Live sessions should be categorized and stage-specific. A team should only see relevant sessions, rather than every session across all categories.
+
+9. Notifications
+The Notifications section allows admins to create popup announcements.
+
+The screenshot explicitly indicates:
+Create popup notifications that will show to users once after they login. Only enabled notifications will be displayed.
+
+Create notification form
+Field	Description
+Title	Notification title
+Description	Notification content
+Enabled	Active/inactive status
+
+Notification management
+- Create notification.
+- Edit notification.
+- Delete notification.
+- Enable/disable notification.
+- View existing notifications.
+- Refresh notifications.
+Notification cards
+Each notification displays:
+- Title
+- Description
+- Active/inactive status
+- Created date
+- Toggle
+- Edit button
+- Delete button
+Participant-facing behaviour
+- Only active notifications should be displayed.
+- Notifications should appear as popups.
+- Notifications should appear once after login, as described in the reference.
+- Teams should be able to dismiss them.
+- Notifications should be distinguishable from permanent content.
+Recommended improvement
+The system should support notification targeting:
+- All teams
+- Specific stage
+- Specific category
+- Selected teams
+Additionally, notifications should ideally have:
+- Start date/time
+- Expiration date/time
+- Priority
+- Optional attachment or link
+
+10. Budget
+A Budget button is visible in the top navigation.
+
+Its actual functionality is not visible in the provided screenshots, so this should be marked as Unspecified / To Be Defined.
+
+Potential implementation:
+- Total event budget
+- Expense categories
+- Estimated budget
+- Actual expenditure
+- Remaining balance
+- Expense records
+- Download/export report
+Do not implement financial functionality based on assumptions until its purpose is confirmed.
+
+11. Admin Profile / Account
+The top navigation contains an admin account indicator and profile icon.
+
+Potential functionality:
+- Admin account information
+- Change password
+- Profile details
+- Logout
+For the initial implementation, the account system should support at least one administrator. Multiple admins may be supported later.
+
+12. Admin Panel Permissions
+The admin panel should have a strict permission boundary.
+Admin can:
+- Create teams.
+- Edit teams.
+- Reset team credentials.
+- Disable teams.
+- Create schedule entries.
+- Manage stages.
+- Create and manage quizzes.
+- Assign quiz questions.
+- View quiz results.
+- Manage leaderboard scores.
+- Upload content.
+- Manage live sessions.
+- Create notifications.
+- Configure competition status.
+Team participants cannot:
+- Access admin routes.
+- Create teams.
+- Create admin accounts.
+- Modify other teams.
+- Change quiz questions.
+- Modify scores.
+- Change competition schedules.
+- Publish content.
+- Modify notifications.
+- Access administrative database functions.
+Admin authorization must be enforced on the backend, not merely by hiding buttons in the frontend.
+
+13. Backend Data Structure — Initial Proposal
+These functions should be backed by a real database rather than local React state.
+
+Suggested tables:
+Table	Purpose
+admins	Admin account/role records
+teams	Team records
+team_members	Member information
+stages	Competition stages
+schedule_tasks	Timeline/schedule entries
+quiz_questions	Question bank
+stage_quizzes	Quiz configurations
+stage_quiz_questions	Questions assigned to each quiz
+quiz_attempts	Team quiz attempts
+quiz_answers	Answers per attempt
+leaderboard_scores	Team scores per stage
+materials	Documents and resource links
+stage_content	Stage instructions/content
+live_sessions	Online sessions
+notifications	Popup notifications
+notification_reads	Notification dismissal/read state
+submissions	Future submission system
+activity_logs	Admin activity records
+
+
+14. Recommended Admin Activity Logging
+For a competition running over approximately 1.75 months, an activity log would be extremely useful.
+
+Record actions such as:
+- Team created
+- Team edited
+- Team disabled
+- Password reset
+- Quiz activated
+- Quiz deactivated
+- Quiz schedule changed
+- Questions added
+- Questions removed
+- Scores updated
+- Material uploaded
+- Notification created
+- Notification disabled
+- Stage content published
+Each activity should ideally record:
+- Admin identifier
+- Action
+- Target entity
+- Timestamp
+- Previous value
+- New value
+This helps recover mistakes and maintain accountability during the event.
+
+15. Feature Checklist
+Admin Panel — Features Identified from Reference
+✓ Dashboard and statistics
+
+✓ Team registration / account generation
+
+✓ Team list and management
+
+✓ Schedule and task management
+
+✓ Stage-wise leaderboard management
+
+✓ Quiz question bank
+
+✓ Assign questions to stage quizzes
+
+✓ Quiz configuration
+
+✓ Scheduled/manual quiz activation
+
+✓ Quiz results and individual result details
+
+✓ Task materials management
+
+✓ Stage content management
+
+✓ Stage 3 event management
+
+✓ Submission management (future implementation)
+
+✓ Stage/category-specific live sessions
+
+✓ Notification management
+
+✓ Admin account/profile
+
