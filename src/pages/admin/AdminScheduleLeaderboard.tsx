@@ -61,29 +61,29 @@ export function AdminSchedulePage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <form
           onSubmit={handleSubmit}
-          className="lg:col-span-5 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-4 self-start"
+          className="lg:col-span-5 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-4 self-start"
         >
           <h2 className="font-display text-lg font-bold text-white">
             {editingId ? 'Edit Schedule Task' : 'Add Schedule Task'}
           </h2>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Task Title *</label>
+            <label className="block text-xs text-zinc-400 mb-1">Task Title *</label>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Hardware Kit Distribution"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Category</label>
+              <label className="block text-xs text-zinc-400 mb-1">Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as ScheduleCategory)}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
               >
                 <option>Registration</option>
                 <option>Learning Phase</option>
@@ -92,11 +92,11 @@ export function AdminSchedulePage() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Status</label>
+              <label className="block text-xs text-zinc-400 mb-1">Status</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as ScheduleStatus)}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
               >
                 <option>Upcoming</option>
                 <option>Active</option>
@@ -108,46 +108,46 @@ export function AdminSchedulePage() {
           </div>
           <div className="grid grid-cols-3 gap-2">
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Start Date</label>
+              <label className="block text-xs text-zinc-400 mb-1">Start Date</label>
               <input
                 type="text"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white"
+                className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white"
               />
             </div>
             <div>
-              <label className="block text-xs text-slate-400 mb-1">End Date</label>
+              <label className="block text-xs text-zinc-400 mb-1">End Date</label>
               <input
                 type="text"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white"
+                className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white"
               />
             </div>
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Duration</label>
+              <label className="block text-xs text-zinc-400 mb-1">Duration</label>
               <input
                 type="text"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white"
+                className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white"
               />
             </div>
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Description</label>
+            <label className="block text-xs text-zinc-400 mb-1">Description</label>
             <textarea
               rows={3}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
             />
           </div>
           <div className="flex gap-2">
             <button
               type="submit"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-300"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-zinc-950 hover:bg-indigo-50"
             >
               <Plus className="h-3.5 w-3.5" />
               {editingId ? 'Save Task' : 'Add Task'}
@@ -156,7 +156,7 @@ export function AdminSchedulePage() {
               <button
                 type="button"
                 onClick={resetForm}
-                className="rounded-lg border border-slate-700 px-4 py-2 text-xs text-slate-300"
+                className="rounded-lg border border-zinc-700 px-4 py-2 text-xs text-zinc-300"
               >
                 Cancel
               </button>
@@ -166,14 +166,14 @@ export function AdminSchedulePage() {
 
         <div className="lg:col-span-7 space-y-3">
           {schedule.map((task) => (
-            <div key={task.id} className="rounded-xl border border-slate-800 bg-[#0b1120] p-5 flex items-start justify-between gap-4">
+            <div key={task.id} className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-5 flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <p className="font-mono text-xs text-cyan-300">
+                <p className="font-mono text-xs text-indigo-300">
                   {task.category} · {task.status}
                 </p>
                 <h3 className="font-display text-base font-bold text-white">{task.title}</h3>
-                <p className="text-sm text-slate-300">{task.description}</p>
-                <p className="font-mono text-xs text-slate-500 pt-1">
+                <p className="text-sm text-zinc-300">{task.description}</p>
+                <p className="font-mono text-xs text-zinc-500 pt-1">
                   Start: {task.startDate} · End: {task.endDate} · Duration: {task.duration}
                 </p>
               </div>
@@ -182,7 +182,7 @@ export function AdminSchedulePage() {
                   type="button"
                   onClick={() => startEdit(task)}
                   aria-label="Edit task"
-                  className="rounded border border-slate-700 p-2 text-slate-300 hover:border-cyan-400"
+                  className="rounded border border-zinc-700 p-2 text-zinc-300 hover:border-indigo-400"
                 >
                   <Edit3 className="h-3.5 w-3.5" />
                 </button>
@@ -236,8 +236,8 @@ export function AdminLeaderboardPage() {
               onClick={() => setStageKey(s.key)}
               className={`rounded-lg px-4 py-2 text-xs font-bold ${
                 stageKey === s.key
-                  ? 'bg-cyan-400 text-slate-950'
-                  : 'border border-slate-800 bg-[#0b1120] text-slate-300'
+                  ? 'bg-white text-zinc-950'
+                  : 'border border-zinc-800 bg-[#0b0d17] text-zinc-300 hover:text-white'
               }`}
             >
               {s.label}
@@ -247,14 +247,14 @@ export function AdminLeaderboardPage() {
 
         <form
           onSubmit={handleUpdate}
-          className="rounded-xl border border-slate-800 bg-[#0b1120] p-5 grid grid-cols-1 sm:grid-cols-3 gap-4 items-end"
+          className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-5 grid grid-cols-1 sm:grid-cols-3 gap-4 items-end"
         >
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Select Team</label>
+            <label className="block text-xs text-zinc-400 mb-1">Select Team</label>
             <select
               value={selectedTeamId}
               onChange={(e) => setSelectedTeamId(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2.5 text-sm text-white"
             >
               {teams.map((t) => (
                 <option key={t.id} value={t.id}>
@@ -264,28 +264,28 @@ export function AdminLeaderboardPage() {
             </select>
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Numeric Score</label>
+            <label className="block text-xs text-zinc-400 mb-1">Numeric Score</label>
             <input
               type="number"
               step="0.5"
               required
               value={scoreInput}
               onChange={(e) => setScoreInput(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white font-mono"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2.5 text-sm text-white font-mono"
             />
           </div>
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-fuchsia-500 px-5 py-2.5 text-xs font-bold text-white hover:bg-fuchsia-400 min-h-[42px]"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-fuchsia-600 px-5 py-2.5 text-xs font-bold text-white hover:bg-fuchsia-500 min-h-[42px]"
           >
             <Trophy className="h-4 w-4" />
             Add / Update Score
           </button>
         </form>
 
-        <div className="rounded-xl border border-slate-800 bg-[#0b1120] overflow-x-auto">
+        <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-slate-800 bg-slate-950/60 font-mono text-xs text-slate-400 uppercase">
+            <thead className="border-b border-zinc-800 bg-[#070810] font-mono text-xs text-zinc-400 uppercase">
               <tr>
                 <th className="px-5 py-3">Calculated Rank</th>
                 <th className="px-5 py-3">Team</th>
@@ -293,14 +293,14 @@ export function AdminLeaderboardPage() {
                 <th className="px-5 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/70">
+            <tbody className="divide-y divide-zinc-800/70">
               {ranked.map((row) => {
                 const rawEntry = leaderboard.find((l) => l.stageKey === stageKey && l.teamId === row.teamId);
                 return (
                   <tr key={row.teamId}>
-                    <td className="px-5 py-3 font-mono font-bold text-cyan-300 tabular-nums">#{row.rank}</td>
+                    <td className="px-5 py-3 font-mono font-bold text-indigo-300 tabular-nums">#{row.rank}</td>
                     <td className="px-5 py-3 font-semibold text-white">
-                      {row.teamName} <span className="font-mono text-xs text-slate-400">({row.teamCode})</span>
+                      {row.teamName} <span className="font-mono text-xs text-zinc-400">({row.teamCode})</span>
                     </td>
                     <td className="px-5 py-3 font-mono font-bold text-white tabular-nums">{row.score}</td>
                     <td className="px-5 py-3 text-right">
@@ -319,7 +319,7 @@ export function AdminLeaderboardPage() {
               })}
               {ranked.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="px-5 py-8 text-center text-slate-400">
+                  <td colSpan={4} className="px-5 py-8 text-center text-zinc-400">
                     No scores assigned for this stage yet.
                   </td>
                 </tr>

@@ -128,7 +128,7 @@ export function AdminTeamsPage() {
       <div className="space-y-6">
         {/* Sub-navigation Tabs */}
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0b1120] p-1.5">
+          <div className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-[#0b0d17] p-1.5">
             <button
               type="button"
               onClick={() => {
@@ -136,7 +136,7 @@ export function AdminTeamsPage() {
                 setSearchParams({});
               }}
               className={`rounded-lg px-4 py-2 text-xs font-bold transition-colors ${
-                tab === 'list' ? 'bg-cyan-400 text-slate-950' : 'text-slate-300 hover:text-white'
+                tab === 'list' ? 'bg-white text-zinc-950' : 'text-zinc-300 hover:text-white'
               }`}
             >
               All Teams ({teams.length})
@@ -148,7 +148,7 @@ export function AdminTeamsPage() {
                 setSearchParams({tab: 'register'});
               }}
               className={`inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-bold transition-colors ${
-                tab === 'register' ? 'bg-fuchsia-500 text-white' : 'text-slate-300 hover:text-white'
+                tab === 'register' ? 'bg-fuchsia-600 text-white' : 'text-zinc-300 hover:text-white'
               }`}
             >
               <UserPlus className="h-3.5 w-3.5" />
@@ -170,7 +170,7 @@ export function AdminTeamsPage() {
                 <button
                   type="button"
                   onClick={() => copyCredentials(createdCreds)}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-emerald-300"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-400 px-4 py-2 text-xs font-bold text-zinc-950 hover:bg-emerald-300"
                 >
                   <Copy className="h-3.5 w-3.5" />
                   Copy Credentials
@@ -178,24 +178,24 @@ export function AdminTeamsPage() {
                 <button
                   type="button"
                   onClick={() => setCreatedCreds(null)}
-                  className="rounded-lg border border-slate-700 px-3 py-2 text-xs text-slate-300"
+                  className="rounded-lg border border-zinc-700 px-3 py-2 text-xs text-zinc-300"
                 >
                   Dismiss
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs bg-slate-950/80 border border-slate-800 rounded-lg p-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs bg-[#070810] border border-zinc-800 rounded-lg p-3">
               <div>
-                <span className="text-slate-400 block">Username</span>
+                <span className="text-zinc-400 block">Username</span>
                 <span className="text-white font-bold">{createdCreds.username}</span>
               </div>
               <div>
-                <span className="text-slate-400 block">Login Email</span>
+                <span className="text-zinc-400 block">Login Email</span>
                 <span className="text-white font-bold">{createdCreds.email}</span>
               </div>
               <div>
-                <span className="text-slate-400 block">Temporary Password</span>
-                <span className="text-cyan-300 font-bold">{createdCreds.password}</span>
+                <span className="text-zinc-400 block">Temporary Password</span>
+                <span className="text-indigo-300 font-bold">{createdCreds.password}</span>
               </div>
             </div>
           </div>
@@ -204,11 +204,11 @@ export function AdminTeamsPage() {
         {tab === 'register' ? (
           <form
             onSubmit={handleRegisterSubmit}
-            className="rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-6 max-w-4xl"
+            className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-6 max-w-4xl"
           >
             <div>
               <h2 className="font-display text-xl font-bold text-white">Register New Team (Admin Only)</h2>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-zinc-400">
                 Create a unique team record and generate team portal login credentials.
               </p>
             </div>
@@ -221,23 +221,23 @@ export function AdminTeamsPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Team Name *</label>
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">Team Name *</label>
                 <input
                   type="text"
                   required
                   value={teamName}
                   onChange={(e) => setTeamName(e.target.value)}
                   placeholder="e.g. Mecha Spark"
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-cyan-400 focus:outline-none"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3.5 py-2.5 text-sm text-white focus:border-indigo-400 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Robot Category *</label>
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">Robot Category *</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value as CategorySlug)}
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3.5 py-2.5 text-sm text-white"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3.5 py-2.5 text-sm text-white"
                 >
                   {COMPETITION_CATEGORIES.map((c) => (
                     <option key={c.slug} value={c.slug}>
@@ -248,22 +248,22 @@ export function AdminTeamsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Institution</label>
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">Institution</label>
                 <input
                   type="text"
                   value={institution}
                   onChange={(e) => setInstitution(e.target.value)}
                   placeholder="University / College Name"
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3.5 py-2.5 text-sm text-white"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3.5 py-2.5 text-sm text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Number of Members</label>
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">Number of Members</label>
                 <select
                   value={memberCount}
                   onChange={(e) => setMemberCount(Number(e.target.value))}
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3.5 py-2.5 text-sm text-white"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3.5 py-2.5 text-sm text-white"
                 >
                   {[2, 3, 4, 5].map((n) => (
                     <option key={n} value={n}>
@@ -274,12 +274,12 @@ export function AdminTeamsPage() {
               </div>
             </div>
 
-            <div className="space-y-3 border-t border-slate-800 pt-5">
-              <h3 className="text-sm font-bold text-cyan-300">Member Details</h3>
+            <div className="space-y-3 border-t border-zinc-800 pt-5">
+              <h3 className="text-sm font-bold text-indigo-300">Member Details</h3>
               {Array.from({length: memberCount}).map((_, idx) => (
-                <div key={idx} className="grid grid-cols-1 sm:grid-cols-3 gap-3 rounded-lg border border-slate-800 bg-slate-950/60 p-3.5">
+                <div key={idx} className="grid grid-cols-1 sm:grid-cols-3 gap-3 rounded-lg border border-zinc-800 bg-[#070810] p-3.5">
                   <div>
-                    <label className="block text-[11px] text-slate-400 mb-1">
+                    <label className="block text-[11px] text-zinc-400 mb-1">
                       Member {idx + 1} Name {idx === 0 ? '(Leader)' : ''} *
                     </label>
                     <input
@@ -291,11 +291,11 @@ export function AdminTeamsPage() {
                         copy[idx] = {...copy[idx], fullName: e.target.value};
                         setMemberInputs(copy);
                       }}
-                      className="w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                      className="w-full rounded-md border border-zinc-700 bg-[#06070d] px-3 py-2 text-sm text-white"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] text-slate-400 mb-1">Email *</label>
+                    <label className="block text-[11px] text-zinc-400 mb-1">Email *</label>
                     <input
                       type="email"
                       required
@@ -305,11 +305,11 @@ export function AdminTeamsPage() {
                         copy[idx] = {...copy[idx], email: e.target.value};
                         setMemberInputs(copy);
                       }}
-                      className="w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                      className="w-full rounded-md border border-zinc-700 bg-[#06070d] px-3 py-2 text-sm text-white"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] text-slate-400 mb-1">Role</label>
+                    <label className="block text-[11px] text-zinc-400 mb-1">Role</label>
                     <input
                       type="text"
                       value={memberInputs[idx]?.role || ''}
@@ -318,7 +318,7 @@ export function AdminTeamsPage() {
                         copy[idx] = {...copy[idx], role: e.target.value};
                         setMemberInputs(copy);
                       }}
-                      className="w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                      className="w-full rounded-md border border-zinc-700 bg-[#06070d] px-3 py-2 text-sm text-white"
                     />
                   </div>
                 </div>
@@ -327,7 +327,7 @@ export function AdminTeamsPage() {
 
             <button
               type="submit"
-              className="inline-flex items-center gap-2 rounded-lg bg-cyan-400 px-6 py-3 text-sm font-bold text-slate-950 hover:bg-cyan-300"
+              className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-zinc-950 hover:bg-indigo-50"
             >
               <Plus className="h-4 w-4" />
               Create Team & Generate Credentials
@@ -338,7 +338,7 @@ export function AdminTeamsPage() {
             {/* Search, Filters, Sort */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="relative">
-                <Search className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Search className="h-4 w-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="search"
                   value={search}
@@ -347,7 +347,7 @@ export function AdminTeamsPage() {
                     setPage(1);
                   }}
                   placeholder="Search team name or ID..."
-                  className="w-full rounded-lg border border-slate-800 bg-[#0b1120] pl-9 pr-3 py-2.5 text-sm text-white"
+                  className="w-full rounded-lg border border-zinc-800 bg-[#0b0d17] pl-9 pr-3 py-2.5 text-sm text-white"
                 />
               </div>
 
@@ -357,7 +357,7 @@ export function AdminTeamsPage() {
                   setCatFilter(e.target.value as CategorySlug | 'all');
                   setPage(1);
                 }}
-                className="rounded-lg border border-slate-800 bg-[#0b1120] px-3 py-2.5 text-sm text-white"
+                className="rounded-lg border border-zinc-800 bg-[#0b0d17] px-3 py-2.5 text-sm text-white"
               >
                 <option value="all">All Categories</option>
                 {COMPETITION_CATEGORIES.map((c) => (
@@ -373,7 +373,7 @@ export function AdminTeamsPage() {
                   setStatusFilter(e.target.value as TeamStatus | 'all');
                   setPage(1);
                 }}
-                className="rounded-lg border border-slate-800 bg-[#0b1120] px-3 py-2.5 text-sm text-white"
+                className="rounded-lg border border-zinc-800 bg-[#0b0d17] px-3 py-2.5 text-sm text-white"
               >
                 <option value="all">All Statuses</option>
                 <option value="active">Active</option>
@@ -384,7 +384,7 @@ export function AdminTeamsPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'name' | 'date' | 'category')}
-                className="rounded-lg border border-slate-800 bg-[#0b1120] px-3 py-2.5 text-sm text-white"
+                className="rounded-lg border border-zinc-800 bg-[#0b0d17] px-3 py-2.5 text-sm text-white"
               >
                 <option value="date">Sort: Created Date</option>
                 <option value="name">Sort: Team Name</option>
@@ -393,9 +393,9 @@ export function AdminTeamsPage() {
             </div>
 
             {/* Teams Table */}
-            <div className="rounded-xl border border-slate-800 bg-[#0b1120] overflow-x-auto">
+            <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-slate-800 bg-slate-950/60 font-mono text-xs text-slate-400 uppercase">
+                <thead className="border-b border-zinc-800 bg-[#070810] font-mono text-xs text-zinc-400 uppercase">
                   <tr>
                     <th className="px-4 py-3">Team ID</th>
                     <th className="px-4 py-3">Team Name</th>
@@ -405,18 +405,18 @@ export function AdminTeamsPage() {
                     <th className="px-4 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/70">
+                <tbody className="divide-y divide-zinc-800/70">
                   {pagedTeams.map((team) => (
-                    <tr key={team.id} className="hover:bg-slate-900/40">
-                      <td className="px-4 py-3 font-mono text-xs text-cyan-300 tabular-nums">{team.teamCode}</td>
+                    <tr key={team.id} className="hover:bg-zinc-900/40">
+                      <td className="px-4 py-3 font-mono text-xs text-indigo-300 tabular-nums">{team.teamCode}</td>
                       <td className="px-4 py-3">
-                        <Link to={`/admin/teams/${team.id}`} className="font-semibold text-white hover:text-cyan-300">
+                        <Link to={`/admin/teams/${team.id}`} className="font-semibold text-white hover:text-indigo-300">
                           {team.teamName}
                         </Link>
-                        <span className="block font-mono text-xs text-slate-400">@{team.loginUsername}</span>
+                        <span className="block font-mono text-xs text-zinc-400">@{team.loginUsername}</span>
                       </td>
-                      <td className="px-4 py-3 text-slate-300">{getCategoryName(team.category)}</td>
-                      <td className="px-4 py-3 font-mono tabular-nums text-slate-300">{team.members.length}</td>
+                      <td className="px-4 py-3 text-zinc-300">{getCategoryName(team.category)}</td>
+                      <td className="px-4 py-3 font-mono tabular-nums text-zinc-300">{team.members.length}</td>
                       <td className="px-4 py-3">
                         <span
                           className={`text-xs font-semibold capitalize ${
@@ -434,7 +434,7 @@ export function AdminTeamsPage() {
                         <div className="inline-flex items-center gap-1.5">
                           <Link
                             to={`/admin/teams/${team.id}`}
-                            className="rounded border border-slate-700 px-2.5 py-1 text-xs text-slate-200 hover:border-cyan-400"
+                            className="rounded border border-zinc-700 px-2.5 py-1 text-xs text-zinc-200 hover:border-indigo-400"
                           >
                             View
                           </Link>
@@ -452,7 +452,7 @@ export function AdminTeamsPage() {
                               }
                             }}
                             title="Reset Password"
-                            className="rounded border border-slate-700 p-1.5 text-slate-300 hover:border-cyan-400 hover:text-cyan-300"
+                            className="rounded border border-zinc-700 p-1.5 text-zinc-300 hover:border-indigo-400 hover:text-indigo-300"
                           >
                             <KeyRound className="h-3.5 w-3.5" />
                           </button>
@@ -461,7 +461,7 @@ export function AdminTeamsPage() {
                             onClick={() =>
                               setTeamStatus(team.id, team.status === 'active' ? 'disabled' : 'active')
                             }
-                            className="rounded border border-slate-700 px-2.5 py-1 text-xs text-slate-200 hover:border-amber-400"
+                            className="rounded border border-zinc-700 px-2.5 py-1 text-xs text-zinc-200 hover:border-amber-400"
                           >
                             {team.status === 'active' ? 'Disable' : 'Activate'}
                           </button>
@@ -479,7 +479,7 @@ export function AdminTeamsPage() {
                   ))}
                   {pagedTeams.length === 0 && (
                     <tr>
-                      <td colSpan={6} className="px-4 py-10 text-center text-slate-400">
+                      <td colSpan={6} className="px-4 py-10 text-center text-zinc-400">
                         No teams match the current filters.
                       </td>
                     </tr>
@@ -489,7 +489,7 @@ export function AdminTeamsPage() {
             </div>
 
             {totalPages > 1 && (
-              <div className="flex items-center justify-between text-xs text-slate-400">
+              <div className="flex items-center justify-between text-xs text-zinc-400">
                 <span className="tabular-nums">
                   Page {page} of {totalPages}
                 </span>
@@ -498,7 +498,7 @@ export function AdminTeamsPage() {
                     type="button"
                     disabled={page === 1}
                     onClick={() => setPage((p) => p - 1)}
-                    className="rounded border border-slate-700 px-3 py-1.5 disabled:opacity-40"
+                    className="rounded border border-zinc-700 px-3 py-1.5 disabled:opacity-40"
                   >
                     Prev
                   </button>
@@ -506,7 +506,7 @@ export function AdminTeamsPage() {
                     type="button"
                     disabled={page === totalPages}
                     onClick={() => setPage((p) => p + 1)}
-                    className="rounded border border-slate-700 px-3 py-1.5 disabled:opacity-40"
+                    className="rounded border border-zinc-700 px-3 py-1.5 disabled:opacity-40"
                   >
                     Next
                   </button>
@@ -519,16 +519,16 @@ export function AdminTeamsPage() {
         {/* Delete Confirmation Modal */}
         {deleteTargetId && (
           <div role="dialog" aria-modal="true" className="fixed inset-0 z-[90] flex items-center justify-center bg-black/75 p-4">
-            <div className="w-full max-w-sm rounded-xl border border-rose-500/40 bg-[#0b1120] p-6 space-y-4">
+            <div className="w-full max-w-sm rounded-xl border border-rose-500/40 bg-[#0b0d17] p-6 space-y-4">
               <h3 className="font-display text-lg font-bold text-white">Confirm Team Deletion</h3>
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-zinc-300">
                 Deleting this team permanently removes its member records, quiz attempts, and leaderboard entries.
               </p>
               <div className="flex justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setDeleteTargetId(null)}
-                  className="rounded-lg border border-slate-700 px-4 py-2 text-xs text-slate-300"
+                  className="rounded-lg border border-zinc-700 px-4 py-2 text-xs text-zinc-300"
                 >
                   Cancel
                 </button>
@@ -562,9 +562,9 @@ export function AdminTeamDetailPage() {
   if (!team) {
     return (
       <AdminLayout title="Team Not Found">
-        <div className="rounded-xl border border-slate-800 bg-[#0b1120] p-10 text-center space-y-3">
-          <p className="text-slate-400">Requested team record does not exist.</p>
-          <Link to="/admin/teams" className="text-sm text-cyan-300 underline">
+        <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-10 text-center space-y-3">
+          <p className="text-zinc-400">Requested team record does not exist.</p>
+          <Link to="/admin/teams" className="text-sm text-indigo-300 underline">
             Back to All Teams
           </Link>
         </div>
@@ -578,20 +578,20 @@ export function AdminTeamDetailPage() {
   return (
     <AdminLayout title={`Team · ${team.teamName}`}>
       <div className="space-y-6">
-        <Link to="/admin/teams" className="inline-flex items-center gap-2 text-sm text-cyan-300 hover:underline">
+        <Link to="/admin/teams" className="inline-flex items-center gap-2 text-sm text-indigo-300 hover:underline">
           <ArrowLeft className="h-4 w-4" />
           Back to All Teams
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-5">
+          <div className="lg:col-span-7 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-5">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-mono text-xs text-cyan-300">
+                <p className="font-mono text-xs text-indigo-300">
                   {team.teamCode} · @{team.loginUsername}
                 </p>
                 <h2 className="font-display text-2xl font-bold text-white">{team.teamName}</h2>
-                <p className="text-sm text-slate-400">{team.institution}</p>
+                <p className="text-sm text-zinc-400">{team.institution}</p>
               </div>
               <button
                 type="button"
@@ -599,7 +599,7 @@ export function AdminTeamDetailPage() {
                   const res = resetTeamCredentials(team.id);
                   if (res) setTempCred(res.password);
                 }}
-                className="rounded-lg border border-cyan-500/40 bg-cyan-500/10 px-3.5 py-2 text-xs font-semibold text-cyan-200"
+                className="rounded-lg border border-indigo-400/40 bg-indigo-500/10 px-3.5 py-2 text-xs font-semibold text-indigo-200 hover:bg-indigo-500/20"
               >
                 Reset Credentials
               </button>
@@ -623,22 +623,22 @@ export function AdminTeamDetailPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-zinc-800">
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Edit Team Name</label>
+                <label className="block text-xs text-zinc-400 mb-1">Edit Team Name</label>
                 <input
                   type="text"
                   value={editingName}
                   onChange={(e) => setEditingName(e.target.value)}
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
                 />
               </div>
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Robot Category</label>
+                <label className="block text-xs text-zinc-400 mb-1">Robot Category</label>
                 <select
                   value={editingCat}
                   onChange={(e) => setEditingCat(e.target.value as CategorySlug)}
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
                 >
                   {COMPETITION_CATEGORIES.map((c) => (
                     <option key={c.slug} value={c.slug}>
@@ -652,21 +652,21 @@ export function AdminTeamDetailPage() {
             <button
               type="button"
               onClick={() => updateTeam(team.id, {teamName: editingName, category: editingCat})}
-              className="rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-300"
+              className="rounded-lg bg-white px-4 py-2 text-xs font-bold text-zinc-950 hover:bg-indigo-50"
             >
               Save Changes
             </button>
           </div>
 
-          <div className="lg:col-span-5 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-4">
+          <div className="lg:col-span-5 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-4">
             <h3 className="font-display text-lg font-bold text-white">Team Members ({team.members.length})</h3>
             <div className="space-y-2.5">
               {team.members.map((m) => (
-                <div key={m.id} className="rounded-lg border border-slate-800 bg-slate-950/60 p-3 text-xs">
+                <div key={m.id} className="rounded-lg border border-zinc-800 bg-[#070810] p-3 text-xs">
                   <p className="font-bold text-white">
                     {m.fullName} {m.isLeader ? '(Leader)' : ''}
                   </p>
-                  <p className="text-slate-400">{m.email} · {m.role}</p>
+                  <p className="text-zinc-400">{m.email} · {m.role}</p>
                 </div>
               ))}
             </div>
@@ -674,15 +674,15 @@ export function AdminTeamDetailPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-3">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-3">
             <h3 className="font-display text-base font-bold text-white">Quiz Scores</h3>
             {teamQuizzes.length === 0 ? (
-              <p className="text-xs text-slate-400">No quiz attempts recorded.</p>
+              <p className="text-xs text-zinc-400">No quiz attempts recorded.</p>
             ) : (
               teamQuizzes.map((a) => (
-                <div key={a.id} className="flex justify-between text-xs border-b border-slate-800 pb-2">
+                <div key={a.id} className="flex justify-between text-xs border-b border-zinc-800 pb-2">
                   <span>{a.stageId} (Attempt #{a.attemptNumber})</span>
-                  <span className="font-mono text-cyan-300 tabular-nums">
+                  <span className="font-mono text-indigo-300 tabular-nums">
                     {a.score} / {a.totalPossible}
                   </span>
                 </div>
@@ -690,13 +690,13 @@ export function AdminTeamDetailPage() {
             )}
           </div>
 
-          <div className="rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-3">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-3">
             <h3 className="font-display text-base font-bold text-white">Leaderboard Scores</h3>
             {teamScores.length === 0 ? (
-              <p className="text-xs text-slate-400">No leaderboard entries yet.</p>
+              <p className="text-xs text-zinc-400">No leaderboard entries yet.</p>
             ) : (
               teamScores.map((l) => (
-                <div key={l.id} className="flex justify-between text-xs border-b border-slate-800 pb-2">
+                <div key={l.id} className="flex justify-between text-xs border-b border-zinc-800 pb-2">
                   <span className="font-mono uppercase">{l.stageKey}</span>
                   <span className="font-mono text-fuchsia-300 tabular-nums">{l.score} pts</span>
                 </div>

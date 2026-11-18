@@ -76,8 +76,8 @@ export function StudentLayout({
     <div className="flex h-full flex-col bg-[#1E1B4B] text-indigo-100">
       <div className="flex items-center justify-between px-4 h-16 border-b border-indigo-900/70">
         {!collapsed && (
-          <Link to="/dashboard" className="font-display text-lg font-extrabold tracking-tight text-white whitespace-nowrap">
-            Specte<span className="text-cyan-400">Q</span> Portal
+          <Link to="/dashboard" className="font-display italic text-lg font-bold tracking-tight text-white whitespace-nowrap">
+            Specte<span className="text-indigo-300">Q</span> Portal
           </Link>
         )}
         <button
@@ -146,7 +146,7 @@ export function StudentLayout({
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   {st.isActive ? (
-                    <Layers className="h-4 w-4 shrink-0 text-cyan-300" />
+                    <Layers className="h-4 w-4 shrink-0 text-indigo-300" />
                   ) : (
                     <Lock className="h-4 w-4 shrink-0 text-indigo-400/70" />
                   )}

@@ -14,10 +14,10 @@ export function ToastContainer() {
         const Icon = t.type === 'error' ? AlertCircle : t.type === 'info' ? Info : CheckCircle2;
         const accent =
           t.type === 'error'
-            ? 'border-rose-500/40 bg-slate-950/95 text-rose-100'
+            ? 'border-rose-500/40 bg-[#080a13]/95 text-rose-100'
             : t.type === 'info'
-              ? 'border-cyan-500/40 bg-slate-950/95 text-cyan-100'
-              : 'border-emerald-500/40 bg-slate-950/95 text-emerald-100';
+              ? 'border-indigo-400/40 bg-[#080a13]/95 text-indigo-100'
+              : 'border-emerald-500/40 bg-[#080a13]/95 text-emerald-100';
 
         return (
           <div

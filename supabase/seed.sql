@@ -56,16 +56,76 @@ VALUES
   ('05 · Testing & Scrutiny Checks', 'Pre-arena hardware inspection and track calibration slots.', 'Implementation', '3 Days', 'TBD', 'TBD', 'Upcoming', 5),
   ('06 · Final Robotics Arena & Awards', 'Live championship runs followed by High Score Champion awards.', 'Final Phase', '1 Day', 'TBD', 'TBD', 'Upcoming', 6);
 
--- 5. SEED DEFAULT SITE CONFIG
+-- 5. SEED DEFAULT SITE CONFIG & STAGE 3 ARENA CONFIG
 INSERT INTO public.site_config (key, value)
-VALUES (
-  'main',
-  '{
-    "eventTitle": "SpecteQ 2027",
-    "registrationOpen": true,
-    "googleFormUrl": "",
-    "committeeEmail": "committee@specteq2027.example",
-    "venueText": "TBD — Official 2027 Arena Venue To Be Announced"
-  }'::jsonb
-)
+VALUES
+  (
+    'main',
+    '{
+      "eventTitle": "SpecteQ 2027",
+      "registrationOpen": true,
+      "googleFormUrl": "",
+      "committeeEmail": "committee@specteq2027.example",
+      "venueText": "TBD — Official 2027 Arena Venue To Be Announced"
+    }'::jsonb
+  ),
+  (
+    'stage3_event',
+    '{
+      "title": "SpecteQ 2027 · Final Robotics Arena Championship",
+      "description": "Teams bring their calibrated machines to the official arena for live scrutiny, timed trials, and High Score championship standings.",
+      "venue": "Main Robotics Arena Hall (Official Venue TBD)",
+      "startDateTime": "TBD · 2027 Championship Day",
+      "endDateTime": "TBD",
+      "instructions": "Arrive 60 minutes prior to your scheduled scrutiny slot with batteries charged and safety cutoff switches verified.",
+      "isPublished": true
+    }'::jsonb
+  )
 ON CONFLICT (key) DO NOTHING;
+
+-- 6. SEED COMPETITION MISSIONS (Consumed by Missions & Mission Detail pages)
+INSERT INTO public.missions (slug, code, name, short_desc, core_challenge, skills, learning_outcomes, difficulty, ideal_for, image_url, specs_note, sort_order)
+VALUES
+  (
+    'line-follower',
+    'MISSION 01',
+    'Line Follower',
+    'Build a robot that follows a designated path using sensors, precise navigation, and control algorithms.',
+    'Follow a designated path accurately and efficiently across curves and intersections.',
+    '["IR sensors", "Calibration", "Motor control", "PID / control tuning", "Path tracking"]'::jsonb,
+    '["Sensor calibration", "Accuracy & repeatability", "Speed optimization", "Control systems"]'::jsonb,
+    'Beginner–Intermediate (confirm officially)',
+    'Beginners or teams interested in embedded control',
+    '/src/assets/images/cat_line_follower_1795021276425.jpg',
+    'Exact track geometry, sensor limits, and scoring weights remain configurable until official confirmation.',
+    1
+  ),
+  (
+    'maze-solver',
+    'MISSION 02',
+    'Maze Solver',
+    'Create an intelligent robot that navigates a maze, detects obstacles and dead ends, and finds its way toward the goal.',
+    'Navigate an unknown or structured maze, handle dead ends, and compute an optimal route.',
+    '["Ultrasonic / ToF sensors", "Navigation", "Path planning", "Algorithm design"]'::jsonb,
+    '["Algorithm design", "Sensor integration", "Autonomous decision-making"]'::jsonb,
+    'Intermediate (confirm officially)',
+    'Teams interested in programming, logic, and autonomous navigation',
+    '/src/assets/images/cat_maze_solver_1795021275809.jpg',
+    'Maze cell dimensions, wall height, and run timing rules remain configurable until officially confirmed.',
+    2
+  ),
+  (
+    'self-balancing',
+    'MISSION 03',
+    'Self Balancing',
+    'Design a two-wheeled robot that maintains balance using sensors, feedback control, and real-time decision-making.',
+    'Maintain a two-wheeled inverted-pendulum robot upright while balancing and maneuvering.',
+    '["IMU / gyroscope", "Control theory", "PID tuning", "Signal filtering", "Motor control"]'::jsonb,
+    '["Control theory", "Signal processing", "Real-time system dynamics"]'::jsonb,
+    'Advanced (confirm officially)',
+    'Experienced teams seeking a challenging real-time control problem',
+    '/src/assets/images/cat_self_balancing_1795021276525.jpg',
+    'Disturbance tests, payload rules, and arena scoring criteria remain configurable until officially confirmed.',
+    3
+  )
+ON CONFLICT (slug) DO NOTHING;

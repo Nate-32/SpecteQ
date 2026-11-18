@@ -104,10 +104,10 @@ export function AdminLayout({
         })}
       </nav>
 
-      <div className="border-t border-slate-800 p-3 space-y-1">
+      <div className="border-t border-zinc-800 p-3 space-y-1">
         <Link
           to="/"
-          className="block rounded-lg px-3 py-2 text-xs text-slate-400 hover:bg-slate-900 hover:text-cyan-300"
+          className="block rounded-lg px-3 py-2 text-xs text-zinc-400 hover:bg-zinc-900 hover:text-indigo-300"
         >
           {!collapsed ? 'View Public Website' : 'Web'}
         </Link>
@@ -124,7 +124,7 @@ export function AdminLayout({
   );
 
   return (
-    <div className="min-h-screen flex bg-[#060913] text-slate-100">
+    <div className="min-h-screen flex bg-[#06070d] text-zinc-100">
       <aside className={`hidden lg:block shrink-0 transition-all duration-200 ${collapsed ? 'w-[72px]' : 'w-64'}`}>
         <div className="sticky top-0 h-screen">{SidebarInner}</div>
       </aside>
@@ -137,13 +137,13 @@ export function AdminLayout({
       )}
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="sticky top-0 z-40 h-16 border-b border-slate-800 bg-[#080c17]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between gap-4">
+        <header className="sticky top-0 z-40 h-16 border-b border-zinc-800 bg-[#080a13]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
               aria-label="Open admin menu"
-              className="lg:hidden rounded-lg border border-slate-800 p-2 text-slate-300 hover:text-white"
+              className="lg:hidden rounded-lg border border-zinc-800 p-2 text-zinc-300 hover:text-white"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -154,15 +154,15 @@ export function AdminLayout({
             <button
               type="button"
               onClick={() => setBudgetOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs font-semibold text-slate-200 hover:border-cyan-400"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-xs font-semibold text-zinc-200 hover:border-indigo-400"
             >
-              <Wallet className="h-3.5 w-3.5 text-cyan-400" />
+              <Wallet className="h-3.5 w-3.5 text-indigo-400" />
               <span>Budget</span>
             </button>
-            <span className="hidden md:inline font-mono text-xs text-slate-400">{session.email}</span>
+            <span className="hidden md:inline font-mono text-xs text-zinc-400">{session.email}</span>
             <Link
               to="/admin/settings"
-              className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs font-semibold text-slate-200 hover:border-fuchsia-400"
+              className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-xs font-semibold text-zinc-200 hover:border-fuchsia-400"
             >
               Profile
             </Link>
@@ -174,13 +174,13 @@ export function AdminLayout({
 
       {budgetOpen && (
         <div role="dialog" aria-modal="true" className="fixed inset-0 z-[85] flex items-center justify-center bg-black/75 p-4">
-          <div className="w-full max-w-md rounded-xl border border-slate-700 bg-[#0b1120] p-6 space-y-4">
+          <div className="w-full max-w-md rounded-xl border border-zinc-700 bg-[#0b0d17] p-6 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="font-display text-lg font-bold text-white">Budget Module</h2>
               <button
                 type="button"
                 onClick={() => setBudgetOpen(false)}
-                className="rounded p-1 text-slate-400 hover:text-white"
+                className="rounded p-1 text-zinc-400 hover:text-white"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -188,14 +188,14 @@ export function AdminLayout({
             <p className="text-sm text-amber-200 bg-amber-950/30 border border-amber-500/30 rounded-lg p-3">
               Status: Unspecified / To Be Defined
             </p>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-zinc-300 leading-relaxed">
               Per SpecteQ Admin Specifications (§10), financial expense tracking and budget limits are reserved here and will be activated once the Organizing Committee finalizes expense categories.
             </p>
             <div className="flex justify-end">
               <button
                 type="button"
                 onClick={() => setBudgetOpen(false)}
-                className="rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold text-slate-950"
+                className="rounded-lg bg-white px-4 py-2 text-xs font-bold text-zinc-950 hover:bg-indigo-50"
               >
                 Close
               </button>

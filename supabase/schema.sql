@@ -21,6 +21,7 @@ RETURNS BOOLEAN
 LANGUAGE sql
 STABLE
 SECURITY DEFINER
+SET search_path = public
 AS $$
   SELECT EXISTS (
     SELECT 1 FROM public.admins WHERE id = auth.uid()
@@ -295,6 +296,25 @@ CREATE TABLE IF NOT EXISTS public.activity_logs (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- 10. COMPETITION MISSIONS (Consumed by public Missions & Mission Detail pages)
+CREATE TABLE IF NOT EXISTS public.missions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  slug TEXT UNIQUE NOT NULL,
+  code TEXT NOT NULL,
+  name TEXT NOT NULL,
+  short_desc TEXT NOT NULL,
+  core_challenge TEXT NOT NULL,
+  skills JSONB NOT NULL DEFAULT '[]'::jsonb,
+  learning_outcomes JSONB NOT NULL DEFAULT '[]'::jsonb,
+  difficulty TEXT NOT NULL,
+  ideal_for TEXT NOT NULL,
+  image_url TEXT NOT NULL,
+  specs_note TEXT NOT NULL,
+  sort_order INTEGER NOT NULL DEFAULT 1,
+  is_active BOOLEAN NOT NULL DEFAULT true,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 -- =============================================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
 -- =============================================================================
@@ -319,12 +339,14 @@ ALTER TABLE public.notification_reads ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.support_tickets ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.gallery_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.activity_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.missions ENABLE ROW LEVEL SECURITY;
 
 -- Public Read Policies (Safe public website content)
 CREATE POLICY "Public read site_config" ON public.site_config FOR SELECT USING (true);
 CREATE POLICY "Public read schedule_tasks" ON public.schedule_tasks FOR SELECT USING (true);
 CREATE POLICY "Public read gallery_items" ON public.gallery_items FOR SELECT USING (true);
 CREATE POLICY "Public read leaderboard" ON public.leaderboard_scores FOR SELECT USING (true);
+CREATE POLICY "Public read missions" ON public.missions FOR SELECT USING (true);
 CREATE POLICY "Public read published stages" ON public.stages FOR SELECT USING (is_published = true OR public.is_admin());
 CREATE POLICY "Public read announcements" ON public.announcements FOR SELECT USING (is_published = true OR public.is_admin());
 
@@ -396,6 +418,9 @@ CREATE POLICY "Team manages own support tickets" ON public.support_tickets
   );
 
 -- Admin Full Access Policies
+DROP POLICY IF EXISTS "Self read admins" ON public.admins;
+CREATE POLICY "Self read admins" ON public.admins FOR SELECT USING (id = auth.uid());
+DROP POLICY IF EXISTS "Admin full admins" ON public.admins;
 CREATE POLICY "Admin full admins" ON public.admins FOR ALL USING (public.is_admin());
 CREATE POLICY "Admin full site_config" ON public.site_config FOR ALL USING (public.is_admin());
 CREATE POLICY "Admin full teams" ON public.teams FOR ALL USING (public.is_admin());
@@ -412,3 +437,16 @@ CREATE POLICY "Admin full announcements" ON public.announcements FOR ALL USING (
 CREATE POLICY "Admin full notifications" ON public.notifications FOR ALL USING (public.is_admin());
 CREATE POLICY "Admin full gallery" ON public.gallery_items FOR ALL USING (public.is_admin());
 CREATE POLICY "Admin full activity_logs" ON public.activity_logs FOR ALL USING (public.is_admin());
+DROP POLICY IF EXISTS "Admin full missions" ON public.missions;
+CREATE POLICY "Admin full missions" ON public.missions FOR ALL USING (public.is_admin());
+
+-- =============================================================================
+-- SCHEMA & TABLE GRANTS (Required alongside Row Level Security policies)
+-- =============================================================================
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT SELECT ON public.site_config, public.schedule_tasks, public.gallery_items,
+  public.leaderboard_scores, public.stages, public.announcements, public.missions TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
+GRANT EXECUTE ON FUNCTION public.is_admin() TO anon, authenticated;
+

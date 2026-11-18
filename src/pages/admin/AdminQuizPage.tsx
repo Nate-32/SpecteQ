@@ -92,7 +92,7 @@ export function AdminQuizPage() {
     <AdminLayout title="Quiz Management">
       <div className="space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex gap-2 rounded-xl border border-slate-800 bg-[#0b1120] p-1.5">
+          <div className="flex gap-2 rounded-xl border border-zinc-800 bg-[#0b0d17] p-1.5">
             {[
               {id: 'bank', label: '1. Question Bank & Assignment'},
               {id: 'settings', label: '2. Stage Quiz Settings'},
@@ -103,7 +103,7 @@ export function AdminQuizPage() {
                 type="button"
                 onClick={() => setTab(t.id as typeof tab)}
                 className={`rounded-lg px-4 py-2 text-xs font-bold ${
-                  tab === t.id ? 'bg-cyan-400 text-slate-950' : 'text-slate-300 hover:text-white'
+                  tab === t.id ? 'bg-white text-zinc-950' : 'text-zinc-300 hover:text-white'
                 }`}
               >
                 {t.label}
@@ -115,7 +115,7 @@ export function AdminQuizPage() {
             value={selectedStageId}
             onChange={(e) => setSelectedStageId(e.target.value)}
             aria-label="Select Stage"
-            className="rounded-lg border border-slate-700 bg-[#0b1120] px-3.5 py-2 text-xs font-semibold text-white"
+            className="rounded-lg border border-zinc-700 bg-[#0b0d17] px-3.5 py-2 text-xs font-semibold text-white"
           >
             {stages.map((s) => (
               <option key={s.id} value={s.id}>
@@ -129,10 +129,10 @@ export function AdminQuizPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <form
               onSubmit={handleAddQuestion}
-              className="lg:col-span-5 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-3 self-start"
+              className="lg:col-span-5 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-3 self-start"
             >
               <h2 className="font-display text-lg font-bold text-white">Create Bank Question</h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-zinc-400">
                 Questions live independently in the bank. Toggle checkboxes on the right to assign them to the selected stage.
               </p>
 
@@ -142,14 +142,14 @@ export function AdminQuizPage() {
                 value={qText}
                 onChange={(e) => setQText(e.target.value)}
                 placeholder="Enter question prompt..."
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
               />
 
               <div className="grid grid-cols-3 gap-2">
                 <select
                   value={qType}
                   onChange={(e) => setQType(e.target.value as QuestionType)}
-                  className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white"
+                  className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white"
                 >
                   <option value="mcq">MCQ</option>
                   <option value="true_false">True / False</option>
@@ -160,12 +160,12 @@ export function AdminQuizPage() {
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   placeholder="Topic"
-                  className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white"
+                  className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white"
                 />
                 <select
                   value={difficulty}
                   onChange={(e) => setDifficulty(e.target.value as QuizQuestion['difficulty'])}
-                  className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white"
+                  className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white"
                 >
                   <option>Beginner</option>
                   <option>Intermediate</option>
@@ -175,10 +175,10 @@ export function AdminQuizPage() {
 
               {qType === 'mcq' && (
                 <div className="grid grid-cols-2 gap-2">
-                  <input value={optA} onChange={(e) => setOptA(e.target.value)} placeholder="Option A" className="rounded border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-white" />
-                  <input value={optB} onChange={(e) => setOptB(e.target.value)} placeholder="Option B" className="rounded border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-white" />
-                  <input value={optC} onChange={(e) => setOptC(e.target.value)} placeholder="Option C" className="rounded border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-white" />
-                  <input value={optD} onChange={(e) => setOptD(e.target.value)} placeholder="Option D" className="rounded border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-white" />
+                  <input value={optA} onChange={(e) => setOptA(e.target.value)} placeholder="Option A" className="rounded border border-zinc-700 bg-[#070810] px-2.5 py-1.5 text-xs text-white" />
+                  <input value={optB} onChange={(e) => setOptB(e.target.value)} placeholder="Option B" className="rounded border border-zinc-700 bg-[#070810] px-2.5 py-1.5 text-xs text-white" />
+                  <input value={optC} onChange={(e) => setOptC(e.target.value)} placeholder="Option C" className="rounded border border-zinc-700 bg-[#070810] px-2.5 py-1.5 text-xs text-white" />
+                  <input value={optD} onChange={(e) => setOptD(e.target.value)} placeholder="Option D" className="rounded border border-zinc-700 bg-[#070810] px-2.5 py-1.5 text-xs text-white" />
                 </div>
               )}
 
@@ -188,12 +188,12 @@ export function AdminQuizPage() {
                 value={correct}
                 onChange={(e) => setCorrect(e.target.value)}
                 placeholder={qType === 'true_false' ? 'True or False' : 'Exact Correct Answer text'}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white"
+                className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-xs text-white"
               />
 
               <button
                 type="submit"
-                className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-300"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-zinc-950 hover:bg-indigo-50"
               >
                 <Plus className="h-3.5 w-3.5" />
                 Add to Question Bank
@@ -201,15 +201,15 @@ export function AdminQuizPage() {
             </form>
 
             <div className="lg:col-span-7 space-y-3">
-              <div className="rounded-lg border border-slate-800 bg-[#0b1120] px-4 py-3 text-xs text-cyan-300 font-mono">
+              <div className="rounded-lg border border-zinc-800 bg-[#0b0d17] px-4 py-3 text-xs text-indigo-300 font-mono">
                 Assigned to selected stage: {currentStageQuiz.assignedQuestionIds.length} questions
               </div>
               {questions.map((q) => {
                 const assigned = currentStageQuiz.assignedQuestionIds.includes(q.id);
                 return (
-                  <div key={q.id} className="rounded-xl border border-slate-800 bg-[#0b1120] p-4 flex items-start justify-between gap-3">
+                  <div key={q.id} className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-4 flex items-start justify-between gap-3">
                     <div className="space-y-1">
-                      <p className="font-mono text-xs text-slate-400">
+                      <p className="font-mono text-xs text-zinc-400">
                         {q.topic} · {q.difficulty} · {q.questionType.toUpperCase()}
                       </p>
                       <p className="text-sm font-semibold text-white">{q.questionText}</p>
@@ -221,8 +221,8 @@ export function AdminQuizPage() {
                         onClick={() => toggleQuestionAssignment(q.id)}
                         className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
                           assigned
-                            ? 'bg-cyan-400 text-slate-950'
-                            : 'border border-slate-700 text-slate-300 hover:border-cyan-400'
+                            ? 'bg-white text-zinc-950'
+                            : 'border border-zinc-700 text-zinc-300 hover:border-indigo-400'
                         }`}
                       >
                         {assigned ? <CheckSquare className="h-3.5 w-3.5" /> : <Square className="h-3.5 w-3.5" />}
@@ -245,17 +245,17 @@ export function AdminQuizPage() {
         )}
 
         {tab === 'settings' && (
-          <div className="rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-5 max-w-3xl">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-5 max-w-3xl">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-display text-xl font-bold text-white">{currentStageQuiz.title}</h2>
-                <p className="text-xs text-slate-400">Configure manual/scheduled activation, marks, and attempts.</p>
+                <p className="text-xs text-zinc-400">Configure manual/scheduled activation, marks, and attempts.</p>
               </div>
               <button
                 type="button"
                 onClick={() => upsertStageQuiz({...currentStageQuiz, isEnabled: !currentStageQuiz.isEnabled})}
                 className={`rounded-lg px-4 py-2 text-xs font-bold ${
-                  currentStageQuiz.isEnabled ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-300'
+                  currentStageQuiz.isEnabled ? 'bg-emerald-500 text-zinc-950' : 'bg-zinc-800 text-zinc-300'
                 }`}
               >
                 {currentStageQuiz.isEnabled ? 'Quiz Enabled' : 'Quiz Disabled'}
@@ -264,13 +264,13 @@ export function AdminQuizPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Mode</label>
+                <label className="block text-xs text-zinc-400 mb-1">Mode</label>
                 <select
                   value={currentStageQuiz.mode}
                   onChange={(e) =>
                     upsertStageQuiz({...currentStageQuiz, mode: e.target.value as 'manual' | 'scheduled'})
                   }
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-white"
                 >
                   <option value="manual">Manual Control</option>
                   <option value="scheduled">Scheduled Window</option>
@@ -278,7 +278,7 @@ export function AdminQuizPage() {
               </div>
 
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Question Limit</label>
+                <label className="block text-xs text-zinc-400 mb-1">Question Limit</label>
                 <input
                   type="number"
                   min={1}
@@ -286,12 +286,12 @@ export function AdminQuizPage() {
                   onChange={(e) =>
                     upsertStageQuiz({...currentStageQuiz, questionCount: Number(e.target.value) || 1})
                   }
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white font-mono"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-white font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Points / Question</label>
+                <label className="block text-xs text-zinc-400 mb-1">Points / Question</label>
                 <input
                   type="number"
                   min={1}
@@ -299,12 +299,12 @@ export function AdminQuizPage() {
                   onChange={(e) =>
                     upsertStageQuiz({...currentStageQuiz, pointsPerQuestion: Number(e.target.value) || 1})
                   }
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white font-mono"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-white font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Duration (Minutes)</label>
+                <label className="block text-xs text-zinc-400 mb-1">Duration (Minutes)</label>
                 <input
                   type="number"
                   min={1}
@@ -312,12 +312,12 @@ export function AdminQuizPage() {
                   onChange={(e) =>
                     upsertStageQuiz({...currentStageQuiz, durationMinutes: Number(e.target.value) || 5})
                   }
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white font-mono"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-white font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Max Attempts</label>
+                <label className="block text-xs text-zinc-400 mb-1">Max Attempts</label>
                 <input
                   type="number"
                   min={1}
@@ -325,12 +325,12 @@ export function AdminQuizPage() {
                   onChange={(e) =>
                     upsertStageQuiz({...currentStageQuiz, maxAttempts: Number(e.target.value) || 1})
                   }
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white font-mono"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-white font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Passing Percentage (%)</label>
+                <label className="block text-xs text-zinc-400 mb-1">Passing Percentage (%)</label>
                 <input
                   type="number"
                   min={0}
@@ -339,7 +339,7 @@ export function AdminQuizPage() {
                   onChange={(e) =>
                     upsertStageQuiz({...currentStageQuiz, passingScorePct: Number(e.target.value) || 0})
                   }
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white font-mono"
+                  className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-white font-mono"
                 />
               </div>
             </div>
@@ -347,9 +347,9 @@ export function AdminQuizPage() {
         )}
 
         {tab === 'results' && (
-          <div className="rounded-xl border border-slate-800 bg-[#0b1120] overflow-x-auto">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-slate-800 bg-slate-950/60 font-mono text-xs text-slate-400 uppercase">
+              <thead className="border-b border-zinc-800 bg-[#070810] font-mono text-xs text-zinc-400 uppercase">
                 <tr>
                   <th className="px-4 py-3">Team</th>
                   <th className="px-4 py-3">Stage</th>
@@ -359,17 +359,17 @@ export function AdminQuizPage() {
                   <th className="px-4 py-3 text-right">Details</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/70">
+              <tbody className="divide-y divide-zinc-800/70">
                 {quizAttempts.map((att) => {
                   const team = teams.find((t) => t.id === att.teamId);
                   return (
                     <tr key={att.id}>
                       <td className="px-4 py-3 font-semibold text-white">{team?.teamName || att.teamId}</td>
-                      <td className="px-4 py-3 font-mono text-xs text-cyan-300">{att.stageId}</td>
+                      <td className="px-4 py-3 font-mono text-xs text-indigo-300">{att.stageId}</td>
                       <td className="px-4 py-3 font-mono tabular-nums text-white">
                         {att.score} / {att.totalPossible}
                       </td>
-                      <td className="px-4 py-3 font-mono tabular-nums text-slate-300">{att.correctCount}</td>
+                      <td className="px-4 py-3 font-mono tabular-nums text-zinc-300">{att.correctCount}</td>
                       <td className="px-4 py-3 text-xs font-semibold text-emerald-400">
                         {att.passed ? 'Passed' : 'Not Passed'}
                       </td>
@@ -377,7 +377,7 @@ export function AdminQuizPage() {
                         <button
                           type="button"
                           onClick={() => setInspectAttempt(att)}
-                          className="inline-flex items-center gap-1 rounded border border-slate-700 px-2.5 py-1 text-xs text-slate-200 hover:border-cyan-400"
+                          className="inline-flex items-center gap-1 rounded border border-zinc-700 px-2.5 py-1 text-xs text-zinc-200 hover:border-indigo-400"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           Inspect
@@ -388,7 +388,7 @@ export function AdminQuizPage() {
                 })}
                 {quizAttempts.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-4 py-8 text-center text-slate-400">
+                    <td colSpan={6} className="px-4 py-8 text-center text-zinc-400">
                       No quiz submissions yet.
                     </td>
                   </tr>
@@ -400,14 +400,14 @@ export function AdminQuizPage() {
 
         {inspectAttempt && (
           <div role="dialog" aria-modal="true" className="fixed inset-0 z-[90] flex items-center justify-center bg-black/75 p-4">
-            <div className="w-full max-w-lg rounded-xl border border-slate-700 bg-[#0b1120] p-6 space-y-4 max-h-[85vh] overflow-y-auto">
+            <div className="w-full max-w-lg rounded-xl border border-zinc-700 bg-[#0b0d17] p-6 space-y-4 max-h-[85vh] overflow-y-auto">
               <div className="flex items-center justify-between">
                 <h3 className="font-display text-lg font-bold text-white">Attempt Breakdown</h3>
-                <button type="button" onClick={() => setInspectAttempt(null)} className="text-slate-400 hover:text-white">
+                <button type="button" onClick={() => setInspectAttempt(null)} className="text-zinc-400 hover:text-white">
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              <p className="font-mono text-xs text-cyan-300">
+              <p className="font-mono text-xs text-indigo-300">
                 Score: {inspectAttempt.score} / {inspectAttempt.totalPossible} · Time: {inspectAttempt.timeTakenSeconds}s
               </p>
               <div className="space-y-2">
@@ -415,10 +415,10 @@ export function AdminQuizPage() {
                   const q = questions.find((item) => item.id === qid);
                   const ok = q && ans.toLowerCase() === q.correctAnswer.toLowerCase();
                   return (
-                    <div key={qid} className="rounded-lg border border-slate-800 bg-slate-950 p-3 text-xs space-y-1">
+                    <div key={qid} className="rounded-lg border border-zinc-800 bg-[#070810] p-3 text-xs space-y-1">
                       <p className="font-semibold text-white">{q?.questionText || qid}</p>
                       <p className={ok ? 'text-emerald-400' : 'text-rose-400'}>Team Answer: {ans}</p>
-                      {q && <p className="text-slate-400">Correct Answer: {q.correctAnswer}</p>}
+                      {q && <p className="text-zinc-400">Correct Answer: {q.correctAnswer}</p>}
                     </div>
                   );
                 })}

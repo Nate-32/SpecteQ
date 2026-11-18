@@ -1,5 +1,7 @@
 import React, {createContext, useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import {
+  COMPETITION_CATEGORIES,
+  type CategoryMeta,
   INITIAL_ACTIVITY_LOGS,
   INITIAL_ANNOUNCEMENTS,
   INITIAL_GALLERY,
@@ -19,6 +21,7 @@ import {
   INITIAL_TEAMS,
   INITIAL_TICKETS,
 } from '../data/specteqData';
+import {fetchArenaApi, fetchMissionsApi} from './supabaseApi';
 import type {
   ActivityLog,
   Announcement,
@@ -88,6 +91,7 @@ export interface RankedLeaderboardEntry {
 }
 
 interface SpecteQContextValue extends PersistedState {
+  missions: CategoryMeta[];
   session: AuthSession | null;
   currentTeam: Team | null;
   readNotificationIds: string[];
@@ -98,8 +102,6 @@ interface SpecteQContextValue extends PersistedState {
   // Auth
   loginTeam: (identifier: string, password: string) => Promise<{ok: boolean; error?: string}>;
   loginAdmin: (email: string, password: string) => Promise<{ok: boolean; error?: string}>;
-  requestPasswordReset: (email: string) => Promise<{ok: boolean; message: string}>;
-  updatePassword: (newPassword: string) => Promise<{ok: boolean; message: string}>;
   logout: () => Promise<void>;
   // Team management (Admin)
   createTeam: (input: {
@@ -233,6 +235,7 @@ const SpecteQContext = createContext<SpecteQContextValue | null>(null);
 
 export function SpecteQProvider({children}: {children: React.ReactNode}) {
   const [state, setState] = useState<PersistedState>(loadInitialState);
+  const [missions, setMissions] = useState<CategoryMeta[]>(COMPETITION_CATEGORIES);
   const [session, setSession] = useState<AuthSession | null>(loadSession);
   const [readNotificationIds, setReadNotificationIds] = useState<string[]>(loadReadNotifs);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -261,6 +264,35 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
       // Ignore
     }
   }, [readNotificationIds]);
+
+  // Hydrate public missions, arena config, schedule & stages from Supabase on mount
+  useEffect(() => {
+    if (!isSupabaseConfigured) return;
+    let active = true;
+
+    Promise.all([
+      fetchMissionsApi(),
+      fetchArenaApi(state.stage3Event, state.schedule, state.stages, state.siteConfig),
+    ]).then(([missionsRes, arenaRes]) => {
+      if (!active) return;
+      if (missionsRes.source === 'supabase' && missionsRes.missions.length > 0) {
+        setMissions(missionsRes.missions);
+      }
+      if (arenaRes.source === 'supabase') {
+        setState((prev) => ({
+          ...prev,
+          stage3Event: arenaRes.stage3Event,
+          schedule: arenaRes.schedule.length > 0 ? arenaRes.schedule : prev.schedule,
+          stages: arenaRes.stages.length > 0 ? arenaRes.stages : prev.stages,
+          siteConfig: arenaRes.siteConfig,
+        }));
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // Sync Supabase auth listener + public config if configured
   useEffect(() => {
@@ -385,15 +417,26 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
       if (error || !data.user) {
         return {ok: false, error: error?.message || 'Supabase admin authentication failed.'};
       }
-      const {data: adminRow} = await sb
+      const {data: adminRow, error: adminError} = await sb
         .from('admins')
         .select('id, display_name')
         .eq('id', data.user.id)
         .maybeSingle();
 
+      if (adminError) {
+        await sb.auth.signOut();
+        return {
+          ok: false,
+          error: `Admin verification failed (${adminError.message}). Make sure supabase/schema.sql has been run in your Supabase SQL Editor.`,
+        };
+      }
+
       if (!adminRow) {
         await sb.auth.signOut();
-        return {ok: false, error: 'Access denied: account does not hold administrator privileges.'};
+        return {
+          ok: false,
+          error: `Access denied: ${cleanEmail} is signed in (Auth UID: ${data.user.id}), but is not listed in the public.admins table yet.`,
+        };
       }
       setSession({
         role: 'admin',
@@ -417,47 +460,6 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
 
     return {ok: false, error: 'Invalid administrator credentials.'};
   }, []);
-
-  const requestPasswordReset = useCallback(async (email: string) => {
-    const cleanEmail = email.trim();
-    if (!cleanEmail) {
-      return {ok: false, message: 'Enter your registered email address.'};
-    }
-    const sb = getSupabaseClient();
-    if (sb) {
-      const redirectTo = `${window.location.origin}${import.meta.env.BASE_URL || '/'}reset-password`;
-      const {error} = await sb.auth.resetPasswordForEmail(cleanEmail, {redirectTo});
-      if (error) return {ok: false, message: error.message};
-      return {ok: true, message: 'Password reset instructions have been sent to your email.'};
-    }
-    return {
-      ok: true,
-      message:
-        'Preview Mode: Ask your SpecteQ Admin to reset your team credentials from Admin -> Teams, or connect Supabase Auth for automated email reset.',
-    };
-  }, []);
-
-  const updatePassword = useCallback(async (newPassword: string) => {
-    if (newPassword.length < 8) {
-      return {ok: false, message: 'Password must be at least 8 characters long.'};
-    }
-    const sb = getSupabaseClient();
-    if (sb && session?.isSupabaseAuth) {
-      const {error} = await sb.auth.updateUser({password: newPassword});
-      if (error) return {ok: false, message: error.message};
-      return {ok: true, message: 'Password updated successfully.'};
-    }
-    if (session?.teamId) {
-      setState((prev) => ({
-        ...prev,
-        teams: prev.teams.map((t) =>
-          t.id === session.teamId ? {...t, passwordHashOrPreview: newPassword, updatedAt: new Date().toISOString()} : t
-        ),
-      }));
-      return {ok: true, message: 'Team password updated.'};
-    }
-    return {ok: true, message: 'Password updated in current session.'};
-  }, [session]);
 
   const logout = useCallback(async () => {
     const sb = getSupabaseClient();
@@ -1191,19 +1193,27 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
   const updateStage3Event = useCallback(
     (cfg: Stage3EventConfig) => {
       setState((prev) => ({...prev, stage3Event: cfg}));
+      const sb = getSupabaseClient();
+      if (sb && session?.isSupabaseAuth && session.role === 'admin') {
+        void sb.from('site_config').upsert({key: 'stage3_event', value: cfg, updated_at: new Date().toISOString()});
+      }
       appendLog('Updated Stage 3 Event', cfg.title, `Venue: ${cfg.venue}`);
       pushToast('Stage 3 Event details saved.');
     },
-    [appendLog, pushToast]
+    [appendLog, pushToast, session?.isSupabaseAuth, session?.role]
   );
 
   const updateSiteConfig = useCallback(
     (cfg: SiteConfig) => {
       setState((prev) => ({...prev, siteConfig: cfg}));
+      const sb = getSupabaseClient();
+      if (sb && session?.isSupabaseAuth && session.role === 'admin') {
+        void sb.from('site_config').upsert({key: 'main', value: cfg, updated_at: new Date().toISOString()});
+      }
       appendLog('Updated Site Configuration', 'Global Settings', 'Updated registration/contact config');
       pushToast('Site settings saved.');
     },
-    [appendLog, pushToast]
+    [appendLog, pushToast, session?.isSupabaseAuth, session?.role]
   );
 
   const resetDemoDatabase = useCallback(() => {
@@ -1219,6 +1229,7 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
 
   const value: SpecteQContextValue = {
     ...state,
+    missions,
     session,
     currentTeam,
     readNotificationIds,
@@ -1228,8 +1239,6 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
     dismissToast,
     loginTeam,
     loginAdmin,
-    requestPasswordReset,
-    updatePassword,
     logout,
     createTeam,
     updateTeam,

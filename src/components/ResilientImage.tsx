@@ -24,10 +24,10 @@ export function ResilientImage({
       <div
         role="img"
         aria-label={alt}
-        className={`flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-[#0d1428] to-slate-950 border border-cyan-500/20 text-slate-400 p-4 ${className}`}
+        className={`flex flex-col items-center justify-center bg-gradient-to-br from-zinc-900 via-[#0d1020] to-[#06070d] border border-indigo-400/20 text-zinc-400 p-4 ${className}`}
       >
-        <Cpu className="h-8 w-8 text-cyan-400/70 mb-2" />
-        <span className="text-xs font-medium text-center text-slate-300">
+        <Cpu className="h-8 w-8 text-indigo-400/70 mb-2" />
+        <span className="text-xs font-medium text-center text-zinc-300">
           {fallbackTitle || alt}
         </span>
       </div>

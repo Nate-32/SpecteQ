@@ -33,16 +33,13 @@ Follow these steps in order—no prior database experience required.
 1. On the left sidebar, click **Authentication** &rarr; **Users**.
 2. Click **Add user** &rarr; **Create new user**.
 3. Enter your Admin email (e.g., `admin@specteq.dev`) and a strong password, check **Auto Confirm User**, and click **Create user**.
-4. Copy the **User UID** shown in the Users table (looks like `a1b2c3d4-...`).
-5. Go back to **SQL Editor** &rarr; **New query**, paste this SQL (replacing the UID and email with yours), and click **Run**:
+4. Go back to **SQL Editor** &rarr; **New query**, paste this SQL (replacing the email with the one you just created), and click **Run**:
    ```sql
    INSERT INTO public.admins (id, email, display_name, role)
-   VALUES (
-     'PASTE-YOUR-USER-UID-HERE',
-     'admin@specteq.dev',
-     'SpecteQ Chief Admin',
-     'super_admin'
-   );
+   SELECT id, email, 'SpecteQ Chief Admin', 'super_admin'
+   FROM auth.users
+   WHERE email = 'admin@specteq.dev'
+   ON CONFLICT (id) DO NOTHING;
    ```
    Now you can sign into `/admin` using that email and password!
 

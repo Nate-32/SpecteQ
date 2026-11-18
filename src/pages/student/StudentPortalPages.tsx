@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 import {
   CheckCircle2,
   ChevronDown,
@@ -328,25 +329,9 @@ export function StudentAnnouncementsPage() {
 }
 
 export function StudentSettingsPage() {
-  const {currentTeam, updatePassword, pushToast} = useSpecteQ();
-  const [newPassword, setNewPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
+  const {currentTeam} = useSpecteQ();
 
   if (!currentTeam) return null;
-
-  const handlePasswordChange = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newPassword !== confirm) {
-      pushToast('Passwords do not match.', 'error');
-      return;
-    }
-    const res = await updatePassword(newPassword);
-    pushToast(res.message, res.ok ? 'success' : 'error');
-    if (res.ok) {
-      setNewPassword('');
-      setConfirm('');
-    }
-  };
 
   return (
     <StudentLayout title="Team Profile & Settings">
@@ -378,34 +363,22 @@ export function StudentSettingsPage() {
         <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-4">
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-violet-700" />
-            <h2 className="font-display text-lg font-bold text-slate-900">Change Team Password</h2>
+            <h2 className="font-display text-lg font-bold text-slate-900">Account Credentials</h2>
           </div>
-          <form onSubmit={handlePasswordChange} className="space-y-3">
-            <input
-              type="password"
-              required
-              minLength={8}
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="New password (min 8 chars)"
-              className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm"
-            />
-            <input
-              type="password"
-              required
-              minLength={8}
-              value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
-              placeholder="Confirm new password"
-              className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm"
-            />
-            <button
-              type="submit"
-              className="rounded-lg bg-violet-700 px-5 py-2.5 text-xs font-bold text-white hover:bg-violet-600"
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Team login credentials are issued and managed centrally by the SpecteQ Organizing Committee to preserve fair competition auditability.
+          </p>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If your team requires a credential reissue or account update, contact an organizer through the Support Desk.
+          </p>
+          <div className="pt-1">
+            <Link
+              to="/portal/support"
+              className="inline-flex items-center gap-2 rounded-lg bg-violet-700 px-5 py-2.5 text-xs font-bold text-white hover:bg-violet-600 transition-colors"
             >
-              Update Password
-            </button>
-          </form>
+              Open Support Desk
+            </Link>
+          </div>
         </div>
       </div>
     </StudentLayout>

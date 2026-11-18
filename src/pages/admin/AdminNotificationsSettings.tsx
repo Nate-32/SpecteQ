@@ -69,7 +69,7 @@ export function AdminNotificationsPage() {
   return (
     <AdminLayout title="Notifications & Announcements">
       <div className="space-y-6">
-        <div className="flex flex-wrap gap-2 rounded-xl border border-slate-800 bg-[#0b1120] p-1.5">
+        <div className="flex flex-wrap gap-2 rounded-xl border border-zinc-800 bg-[#0b0d17] p-1.5">
           {[
             {id: 'popups', label: `Popup Alerts (${notifications.length})`},
             {id: 'announcements', label: `Announcements (${announcements.length})`},
@@ -80,7 +80,7 @@ export function AdminNotificationsPage() {
               type="button"
               onClick={() => setTab(t.id as typeof tab)}
               className={`rounded-lg px-4 py-2 text-xs font-bold ${
-                tab === t.id ? 'bg-cyan-400 text-slate-950' : 'text-slate-300 hover:text-white'
+                tab === t.id ? 'bg-white text-zinc-950' : 'text-zinc-300 hover:text-white'
               }`}
             >
               {t.label}
@@ -90,27 +90,27 @@ export function AdminNotificationsPage() {
 
         {tab === 'popups' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <form onSubmit={handleAddPopup} className="lg:col-span-5 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-3 self-start">
+            <form onSubmit={handleAddPopup} className="lg:col-span-5 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-3 self-start">
               <h2 className="font-display text-lg font-bold text-white">Create Login Popup Alert</h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-zinc-400">
                 Enabled notifications appear once to targeted teams after login.
               </p>
-              <input required value={nTitle} onChange={(e) => setNTitle(e.target.value)} placeholder="Notification Title" className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white" />
-              <textarea required rows={3} value={nDesc} onChange={(e) => setNDesc(e.target.value)} placeholder="Message content..." className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white" />
+              <input required value={nTitle} onChange={(e) => setNTitle(e.target.value)} placeholder="Notification Title" className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white" />
+              <textarea required rows={3} value={nDesc} onChange={(e) => setNDesc(e.target.value)} placeholder="Message content..." className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white" />
               <div className="grid grid-cols-2 gap-2">
-                <select value={nScope} onChange={(e) => setNScope(e.target.value as 'all' | 'category')} className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white">
+                <select value={nScope} onChange={(e) => setNScope(e.target.value as 'all' | 'category')} className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white">
                   <option value="all">Target: All Teams</option>
                   <option value="category">Target: Specific Category</option>
                 </select>
                 {nScope === 'category' && (
-                  <select value={nTargetVal} onChange={(e) => setNTargetVal(e.target.value)} className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white">
+                  <select value={nTargetVal} onChange={(e) => setNTargetVal(e.target.value)} className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white">
                     <option value="line-follower">Line Follower</option>
                     <option value="maze-solver">Maze Solver</option>
                     <option value="self-balancing">Self Balancing</option>
                   </select>
                 )}
               </div>
-              <button type="submit" className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold text-slate-950">
+              <button type="submit" className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-zinc-950 hover:bg-indigo-50">
                 <Plus className="h-3.5 w-3.5" />
                 Create Notification
               </button>
@@ -118,19 +118,19 @@ export function AdminNotificationsPage() {
 
             <div className="lg:col-span-7 space-y-3">
               {notifications.map((n) => (
-                <div key={n.id} className="rounded-xl border border-slate-800 bg-[#0b1120] p-4 flex items-start justify-between gap-3">
+                <div key={n.id} className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-4 flex items-start justify-between gap-3">
                   <div>
-                    <p className="font-mono text-xs text-cyan-300">
+                    <p className="font-mono text-xs text-indigo-300">
                       Scope: {n.targetScope} {n.targetValue ? `(${n.targetValue})` : ''}
                     </p>
                     <h3 className="font-bold text-white">{n.title}</h3>
-                    <p className="text-xs text-slate-300 mt-1">{n.description}</p>
+                    <p className="text-xs text-zinc-300 mt-1">{n.description}</p>
                   </div>
                   <div className="flex gap-2 shrink-0">
                     <button
                       type="button"
                       onClick={() => upsertNotification({...n, isEnabled: !n.isEnabled})}
-                      className={`rounded px-2.5 py-1 text-xs font-bold ${n.isEnabled ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'}`}
+                      className={`rounded px-2.5 py-1 text-xs font-bold ${n.isEnabled ? 'bg-emerald-500 text-zinc-950' : 'bg-zinc-800 text-zinc-400'}`}
                     >
                       {n.isEnabled ? 'Enabled' : 'Paused'}
                     </button>
@@ -146,11 +146,11 @@ export function AdminNotificationsPage() {
 
         {tab === 'announcements' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <form onSubmit={handleAddAnnouncement} className="lg:col-span-5 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-3 self-start">
+            <form onSubmit={handleAddAnnouncement} className="lg:col-span-5 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-3 self-start">
               <h2 className="font-display text-lg font-bold text-white">Publish Official Announcement</h2>
-              <input required value={aTitle} onChange={(e) => setATitle(e.target.value)} placeholder="Announcement Title" className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white" />
+              <input required value={aTitle} onChange={(e) => setATitle(e.target.value)} placeholder="Announcement Title" className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white" />
               <div className="grid grid-cols-2 gap-2">
-                <select value={aCat} onChange={(e) => setACat(e.target.value as AnnouncementCategory)} className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white">
+                <select value={aCat} onChange={(e) => setACat(e.target.value as AnnouncementCategory)} className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white">
                   <option>General</option>
                   <option>Important</option>
                   <option>Schedule Update</option>
@@ -158,14 +158,14 @@ export function AdminNotificationsPage() {
                   <option>Technical Notice</option>
                   <option>Deadline Reminder</option>
                 </select>
-                <select value={aPri} onChange={(e) => setAPri(e.target.value as AnnouncementPriority)} className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white">
+                <select value={aPri} onChange={(e) => setAPri(e.target.value as AnnouncementPriority)} className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white">
                   <option>Normal</option>
                   <option>Important</option>
                   <option>Urgent</option>
                 </select>
               </div>
-              <textarea required rows={3} value={aContent} onChange={(e) => setAContent(e.target.value)} placeholder="Announcement details..." className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white" />
-              <button type="submit" className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold text-slate-950">
+              <textarea required rows={3} value={aContent} onChange={(e) => setAContent(e.target.value)} placeholder="Announcement details..." className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white" />
+              <button type="submit" className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-zinc-950 hover:bg-indigo-50">
                 <Plus className="h-3.5 w-3.5" />
                 Publish
               </button>
@@ -173,13 +173,13 @@ export function AdminNotificationsPage() {
 
             <div className="lg:col-span-7 space-y-3">
               {announcements.map((a) => (
-                <div key={a.id} className="rounded-xl border border-slate-800 bg-[#0b1120] p-4 flex items-start justify-between gap-3">
+                <div key={a.id} className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-4 flex items-start justify-between gap-3">
                   <div>
                     <p className="font-mono text-xs text-fuchsia-300">
                       {a.category} · {a.priority}
                     </p>
                     <h3 className="font-bold text-white">{a.title}</h3>
-                    <p className="text-xs text-slate-300 mt-1">{a.content}</p>
+                    <p className="text-xs text-zinc-300 mt-1">{a.content}</p>
                   </div>
                   <button type="button" onClick={() => deleteAnnouncement(a.id)} className="rounded border border-rose-500/40 p-1.5 text-rose-300 shrink-0">
                     <Trash2 className="h-3.5 w-3.5" />
@@ -195,28 +195,28 @@ export function AdminNotificationsPage() {
             {tickets.map((t) => {
               const team = teams.find((tm) => tm.id === t.teamId);
               return (
-                <div key={t.id} className="rounded-xl border border-slate-800 bg-[#0b1120] p-5 space-y-3">
+                <div key={t.id} className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-5 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                    <span className="text-cyan-300">
+                    <span className="text-indigo-300">
                       {team?.teamName || t.teamId} · {t.category}
                     </span>
                     <span className="font-bold text-amber-300">{t.status}</span>
                   </div>
                   <h3 className="font-bold text-white">{t.subject}</h3>
-                  <p className="text-sm text-slate-300">{t.description}</p>
-                  <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t border-slate-800">
+                  <p className="text-sm text-zinc-300">{t.description}</p>
+                  <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t border-zinc-800">
                     <input
                       value={replyMap[t.id] ?? t.adminReply ?? ''}
                       onChange={(e) => setReplyMap((prev) => ({...prev, [t.id]: e.target.value}))}
                       placeholder="Write organizer response..."
-                      className="flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white"
+                      className="flex-1 rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-xs text-white"
                     />
                     {(['In Progress', 'Resolved'] as SupportTicket['status'][]).map((st) => (
                       <button
                         key={st}
                         type="button"
                         onClick={() => updateSupportTicket(t.id, st, replyMap[t.id] ?? t.adminReply)}
-                        className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:border-cyan-400"
+                        className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-xs font-semibold text-white hover:border-indigo-400"
                       >
                         Mark {st}
                       </button>
@@ -244,63 +244,63 @@ export function AdminSettingsPage() {
   return (
     <AdminLayout title="Settings & Audit Log">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <form onSubmit={handleSave} className="lg:col-span-6 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-4">
+        <form onSubmit={handleSave} className="lg:col-span-6 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-4">
           <h2 className="font-display text-lg font-bold text-white">Competition & Public Site Config</h2>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-zinc-400">
             Backend mode: {supabaseConnected ? 'Connected to Supabase' : 'Local Preview Persistence'} · Admin: {session?.email}
           </p>
 
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Official Registration Google Form URL</label>
+            <label className="block text-xs text-zinc-400 mb-1">Official Registration Google Form URL</label>
             <input
               type="url"
               value={form.googleFormUrl}
               onChange={(e) => setForm({...form, googleFormUrl: e.target.value})}
               placeholder="https://docs.google.com/forms/..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Committee Email</label>
+            <label className="block text-xs text-zinc-400 mb-1">Committee Email</label>
             <input
               type="email"
               value={form.committeeEmail}
               onChange={(e) => setForm({...form, committeeEmail: e.target.value})}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Arena Venue Display Text</label>
+            <label className="block text-xs text-zinc-400 mb-1">Arena Venue Display Text</label>
             <input
               type="text"
               value={form.venueText}
               onChange={(e) => setForm({...form, venueText: e.target.value})}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Team Size Note (Public Registration)</label>
+            <label className="block text-xs text-zinc-400 mb-1">Team Size Note (Public Registration)</label>
             <input
               type="text"
               value={form.teamSizeNote}
               onChange={(e) => setForm({...form, teamSizeNote: e.target.value})}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Registration Fee Note</label>
+            <label className="block text-xs text-zinc-400 mb-1">Registration Fee Note</label>
             <input
               type="text"
               value={form.registrationFeeNote}
               onChange={(e) => setForm({...form, registrationFeeNote: e.target.value})}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+              className="w-full rounded-lg border border-zinc-700 bg-[#070810] px-3 py-2 text-sm text-white"
             />
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
             <button
               type="submit"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-400 px-5 py-2.5 text-xs font-bold text-slate-950 hover:bg-cyan-300"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white px-5 py-2.5 text-xs font-bold text-zinc-950 hover:bg-indigo-50"
             >
               <Save className="h-3.5 w-3.5" />
               Save Configuration
@@ -316,17 +316,17 @@ export function AdminSettingsPage() {
           </div>
         </form>
 
-        <div className="lg:col-span-6 rounded-xl border border-slate-800 bg-[#0b1120] p-6 space-y-4">
+        <div className="lg:col-span-6 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-4">
           <h2 className="font-display text-lg font-bold text-white">Admin Activity Audit Log</h2>
           <div className="space-y-2.5 max-h-[520px] overflow-y-auto pr-1">
             {activityLogs.map((log) => (
-              <div key={log.id} className="rounded-lg border border-slate-800 bg-slate-950/70 p-3 text-xs space-y-1">
-                <div className="flex items-center justify-between text-cyan-300 font-mono">
+              <div key={log.id} className="rounded-lg border border-zinc-800 bg-[#070810] p-3 text-xs space-y-1">
+                <div className="flex items-center justify-between text-indigo-300 font-mono">
                   <span>{log.action}</span>
-                  <span className="text-slate-500">{new Date(log.timestamp).toLocaleString()}</span>
+                  <span className="text-zinc-500">{new Date(log.timestamp).toLocaleString()}</span>
                 </div>
                 <p className="font-semibold text-white">{log.target}</p>
-                <p className="text-slate-400">
+                <p className="text-zinc-400">
                   {log.details} · by {log.actor}
                 </p>
               </div>

@@ -1,6 +1,6 @@
-import {lazy, Suspense, useEffect} from 'react';
+import {lazy, Suspense, useCallback, useEffect, useState} from 'react';
 import {BrowserRouter, Link, Route, Routes, useLocation} from 'react-router-dom';
-import {CinematicIntro} from './components/CinematicIntro';
+import {CinematicIntro, type IntroPhase} from './components/CinematicIntro';
 import {PublicLayout} from './components/PublicLayout';
 import {ToastContainer} from './components/ToastContainer';
 import {SpecteQProvider} from './lib/store';
@@ -39,12 +39,6 @@ const RegisterPage = lazy(() =>
 // Auth routes
 const LoginPage = lazy(() =>
   import('./pages/auth/AuthPages').then((m) => ({default: m.LoginPage}))
-);
-const ForgotPasswordPage = lazy(() =>
-  import('./pages/auth/AuthPages').then((m) => ({default: m.ForgotPasswordPage}))
-);
-const ResetPasswordPage = lazy(() =>
-  import('./pages/auth/AuthPages').then((m) => ({default: m.ResetPasswordPage}))
 );
 const AdminGatePage = lazy(() =>
   import('./pages/auth/AuthPages').then((m) => ({default: m.AdminGatePage}))
@@ -118,7 +112,7 @@ function ScrollToTop() {
 
 function RouteFallback() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center bg-[#060913] text-cyan-300 font-mono text-xs">
+    <div className="min-h-[60vh] flex items-center justify-center bg-[#06070d] text-indigo-300 font-mono text-xs">
       Loading SpecteQ Module...
     </div>
   );
@@ -130,12 +124,12 @@ function NotFoundPage() {
       <div className="mx-auto max-w-xl px-4 py-24 text-center space-y-4">
         <p className="font-mono text-xs text-fuchsia-400">404 · SECTOR NOT FOUND</p>
         <h1 className="font-display text-4xl font-extrabold text-white">Route Not Found</h1>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-zinc-400">
           The requested page does not exist inside the SpecteQ 2027 Arena.
         </p>
         <Link
           to="/"
-          className="inline-flex rounded-lg bg-cyan-400 px-5 py-2.5 text-sm font-bold text-slate-950"
+          className="inline-flex rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-zinc-950 hover:bg-indigo-50 transition-colors"
         >
           Return Home
         </Link>
@@ -146,17 +140,43 @@ function NotFoundPage() {
 
 export default function App() {
   const baseUrl = import.meta.env.BASE_URL || '/';
+  const [introActive, setIntroActive] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    const normalizedPath = window.location.pathname.replace(/\/+$/, '') || '/';
+    return normalizedPath === '/' || normalizedPath === baseUrl.replace(/\/+$/, '');
+  });
+  const [introPhase, setIntroPhase] = useState<IntroPhase>(() => (introActive ? 'playing' : 'done'));
+
+  const handlePhaseChange = useCallback((phase: IntroPhase) => {
+    setIntroPhase(phase);
+    if (phase === 'done') {
+      setIntroActive(false);
+    }
+  }, []);
+
+  const handleReplayIntro = useCallback(() => {
+    window.scrollTo({top: 0, behavior: 'instant' as ScrollBehavior});
+    setIntroPhase('playing');
+    setIntroActive(true);
+  }, []);
 
   return (
     <SpecteQProvider>
       <BrowserRouter basename={baseUrl}>
         <ScrollToTop />
-        <CinematicIntro />
+        <CinematicIntro active={introActive} onPhaseChange={handlePhaseChange} />
         <ToastContainer />
         <Suspense fallback={<RouteFallback />}>
           <Routes>
             {/* Public Website Routes */}
-            <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
+            <Route
+              path="/"
+              element={
+                <PublicLayout>
+                  <HomePage introPhase={introPhase} onReplayIntro={handleReplayIntro} />
+                </PublicLayout>
+              }
+            />
             <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
             <Route path="/missions" element={<PublicLayout><MissionsPage /></PublicLayout>} />
             <Route path="/missions/:slug" element={<PublicLayout><MissionDetailPage /></PublicLayout>} />
@@ -169,8 +189,6 @@ export default function App() {
 
             {/* Auth Routes */}
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/admin" element={<AdminGatePage />} />
 
             {/* Student / Participant Portal Routes */}
