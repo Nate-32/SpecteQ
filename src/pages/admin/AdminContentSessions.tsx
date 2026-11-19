@@ -27,7 +27,8 @@ export function AdminContentPage() {
   const [tab, setTab] = useState<'materials' | 'stages' | 'stage3' | 'submissions' | 'gallery'>('materials');
 
   // New Material State
-  const [matStageId, setMatStageId] = useState(stages[0]?.id || 'stage-0');
+  const [matStageId, setMatStageId] = useState(stages[0]?.id || '');
+  const activeMatStageId = stages.some((s) => s.id === matStageId) ? matStageId : stages[0]?.id || '';
   const [matCategory, setMatCategory] = useState<CategorySlug | 'all'>('all');
   const [matTitle, setMatTitle] = useState('');
   const [matType, setMatType] = useState<ResourceType>('PDF');
@@ -51,10 +52,10 @@ export function AdminContentPage() {
 
   const handleAddMaterial = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!matTitle.trim() || !matUrl.trim()) return;
+    if (!matTitle.trim() || !matUrl.trim() || !activeMatStageId) return;
     upsertMaterial({
       id: `mat-${Date.now()}`,
-      stageId: matStageId,
+      stageId: activeMatStageId,
       category: matCategory,
       title: matTitle.trim(),
       description: matDesc.trim(),
@@ -143,10 +144,14 @@ export function AdminContentPage() {
             <form onSubmit={handleAddMaterial} className="lg:col-span-5 rounded-xl border border-zinc-800 bg-[#0b0d17] p-6 space-y-3 self-start">
               <h2 className="font-display text-lg font-bold text-white">Add Task Material</h2>
               <div className="grid grid-cols-2 gap-2">
-                <select value={matStageId} onChange={(e) => setMatStageId(e.target.value)} className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white">
-                  {stages.map((s) => (
-                    <option key={s.id} value={s.id}>Stage {s.stageNumber}</option>
-                  ))}
+                <select value={activeMatStageId} onChange={(e) => setMatStageId(e.target.value)} className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white">
+                  {stages.length === 0 ? (
+                    <option value="">Create a stage first</option>
+                  ) : (
+                    stages.map((s) => (
+                      <option key={s.id} value={s.id}>Stage {s.stageNumber}</option>
+                    ))
+                  )}
                 </select>
                 <select value={matCategory} onChange={(e) => setMatCategory(e.target.value as CategorySlug | 'all')} className="rounded-lg border border-zinc-700 bg-[#070810] px-2.5 py-2 text-xs text-white">
                   <option value="all">All Categories</option>

@@ -49,9 +49,9 @@ import type {
 } from '../types/specteq';
 import {getSupabaseClient, isSupabaseConfigured} from './supabase';
 
-const STORAGE_KEY = 'specteq_2027_state_v1';
-const SESSION_KEY = 'specteq_2027_session_v1';
-const READ_NOTIFS_KEY = 'specteq_2027_read_notifs_v1';
+const STORAGE_KEY = 'specteq_2027_state_v2';
+const SESSION_KEY = 'specteq_2027_session_v2';
+const READ_NOTIFS_KEY = 'specteq_2027_read_notifs_v2';
 
 interface PersistedState {
   teams: Team[];
@@ -336,7 +336,7 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
   }, []);
 
   const appendLog = useCallback((action: string, target: string, details: string) => {
-    const actor = session?.email || 'admin@specteq.dev';
+    const actor = session?.email || 'admin';
     const entry: ActivityLog = {
       id: `log-${Date.now()}`,
       actor,
@@ -454,18 +454,10 @@ export function SpecteQProvider({children}: {children: React.ReactNode}) {
       return {ok: true};
     }
 
-    // Preview mode admin verification
-    if (cleanEmail === 'admin@specteq.dev' && password === 'SpecteQ@2027') {
-      setSession({
-        role: 'admin',
-        email: cleanEmail,
-        displayName: 'SpecteQ Chief Admin',
-        isSupabaseAuth: false,
-      });
-      return {ok: true};
-    }
-
-    return {ok: false, error: 'Invalid administrator credentials.'};
+    return {
+      ok: false,
+      error: 'Supabase authentication is not configured for this build.',
+    };
   }, []);
 
   const logout = useCallback(async () => {

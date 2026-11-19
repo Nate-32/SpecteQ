@@ -214,6 +214,12 @@ export function ArenaPage() {
               <div key={i} className="h-32 rounded-xl border border-zinc-800 bg-[#0b0d17] animate-pulse" />
             ))}
           </div>
+        ) : schedule.length === 0 ? (
+          <div className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-8 text-center">
+            <p className="text-sm text-zinc-400">
+              Event schedule and milestones will appear once published by the organizers.
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {schedule.map((task) => (

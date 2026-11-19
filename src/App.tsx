@@ -3,6 +3,7 @@ import {BrowserRouter, Link, Route, Routes, useLocation} from 'react-router-dom'
 import {CinematicIntro, type IntroPhase} from './components/CinematicIntro';
 import {PublicLayout} from './components/PublicLayout';
 import {ToastContainer} from './components/ToastContainer';
+import {preloadCriticalAssets} from './lib/assets';
 import {SpecteQProvider} from './lib/store';
 
 // Critical Home route loaded immediately; secondary routes code-split for peak performance
@@ -146,6 +147,10 @@ export default function App() {
     return normalizedPath === '/' || normalizedPath === baseUrl.replace(/\/+$/, '');
   });
   const [introPhase, setIntroPhase] = useState<IntroPhase>(() => (introActive ? 'playing' : 'done'));
+
+  useEffect(() => {
+    preloadCriticalAssets();
+  }, []);
 
   const handlePhaseChange = useCallback((phase: IntroPhase) => {
     setIntroPhase(phase);

@@ -17,7 +17,8 @@ export function AdminQuizPage() {
   } = useSpecteQ();
 
   const [tab, setTab] = useState<'bank' | 'settings' | 'results'>('bank');
-  const [selectedStageId, setSelectedStageId] = useState(stages[0]?.id || 'stage-0');
+  const [selectedStageId, setSelectedStageId] = useState(stages[0]?.id || '');
+  const activeStageId = stages.some((s) => s.id === selectedStageId) ? selectedStageId : stages[0]?.id || '';
   const [inspectAttempt, setInspectAttempt] = useState<QuizAttempt | null>(null);
 
   // Question Bank Form
@@ -31,10 +32,10 @@ export function AdminQuizPage() {
   const [topic, setTopic] = useState('Control Systems');
   const [difficulty, setDifficulty] = useState<QuizQuestion['difficulty']>('Intermediate');
 
-  const currentStageQuiz: StageQuizConfig = stageQuizzes.find((sq) => sq.stageId === selectedStageId) || {
-    id: `quiz-${selectedStageId}`,
-    stageId: selectedStageId,
-    title: `Stage Quiz · ${selectedStageId}`,
+  const currentStageQuiz: StageQuizConfig = stageQuizzes.find((sq) => sq.stageId === activeStageId) || {
+    id: `quiz-${activeStageId || 'stage'}`,
+    stageId: activeStageId,
+    title: `Stage Quiz · ${activeStageId || 'Unassigned'}`,
     description: 'Official stage assessment',
     mode: 'manual',
     isEnabled: false,
@@ -112,16 +113,20 @@ export function AdminQuizPage() {
           </div>
 
           <select
-            value={selectedStageId}
+            value={activeStageId}
             onChange={(e) => setSelectedStageId(e.target.value)}
             aria-label="Select Stage"
             className="rounded-lg border border-zinc-700 bg-[#0b0d17] px-3.5 py-2 text-xs font-semibold text-white"
           >
-            {stages.map((s) => (
-              <option key={s.id} value={s.id}>
-                Stage {s.stageNumber}: {s.taskTitle}
-              </option>
-            ))}
+            {stages.length === 0 ? (
+              <option value="">No stages created yet</option>
+            ) : (
+              stages.map((s) => (
+                <option key={s.id} value={s.id}>
+                  Stage {s.stageNumber}: {s.taskTitle}
+                </option>
+              ))
+            )}
           </select>
         </div>
 

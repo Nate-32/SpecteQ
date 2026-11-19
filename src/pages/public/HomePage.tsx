@@ -141,6 +141,7 @@ export function HomePage({
           src={SPECTEQ_ASSETS.heroArenaBg}
           alt="SpecteQ 2027 futuristic robotics arena backdrop"
           loading="eager"
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-center opacity-45 saturate-90"
         />
         <div
@@ -251,6 +252,7 @@ export function HomePage({
                   src={SPECTEQ_ASSETS.logoBanner}
                   alt="SpecteQ 2027 Official Wordmark Banner"
                   loading="eager"
+                  fetchPriority="high"
                   className="w-full h-auto object-cover specteq-typo-mask"
                 />
               </div>
@@ -648,22 +650,30 @@ export function HomePage({
             </span>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {schedule.map((task) => (
-              <div key={task.id} className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-5 space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-indigo-300">{task.category}</span>
-                  <span className="text-zinc-400">{task.status}</span>
+          {schedule.length === 0 ? (
+            <div className="mt-10 rounded-xl border border-zinc-800 bg-[#0b0d17] p-8 text-center">
+              <p className="text-sm text-zinc-400">
+                Competition timeline and milestones will be published soon.
+              </p>
+            </div>
+          ) : (
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {schedule.map((task) => (
+                <div key={task.id} className="rounded-xl border border-zinc-800 bg-[#0b0d17] p-5 space-y-3">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-indigo-300">{task.category}</span>
+                    <span className="text-zinc-400">{task.status}</span>
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-white">{task.title}</h3>
+                  <p className="text-sm text-zinc-300 leading-relaxed">{task.description}</p>
+                  <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between font-mono text-xs text-zinc-400">
+                    <span>Start: {task.startDate}</span>
+                    <span>Duration: {task.duration}</span>
+                  </div>
                 </div>
-                <h3 className="font-display text-lg font-bold text-white">{task.title}</h3>
-                <p className="text-sm text-zinc-300 leading-relaxed">{task.description}</p>
-                <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between font-mono text-xs text-zinc-400">
-                  <span>Start: {task.startDate}</span>
-                  <span>Duration: {task.duration}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -727,29 +737,37 @@ export function HomePage({
             </Link>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredGallery.map((item) => (
-              <Link
-                key={item.id}
-                to="/gallery"
-                className="group rounded-xl overflow-hidden border border-zinc-800 bg-[#0b0d17] hover:border-indigo-400/60 transition-colors"
-              >
-                <div className="aspect-[4/3] w-full overflow-hidden">
-                  <ResilientImage
-                    src={item.imageUrl}
-                    alt={item.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="font-mono text-xs text-indigo-300">
-                    {item.category} · {item.year}
-                  </p>
-                  <h3 className="mt-1 font-display text-base font-bold text-white">{item.title}</h3>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {featuredGallery.length === 0 ? (
+            <div className="mt-10 rounded-xl border border-zinc-800 bg-[#0b0d17] p-8 text-center">
+              <p className="text-sm text-zinc-400">
+                Gallery photos will appear here once published from the Admin Panel.
+              </p>
+            </div>
+          ) : (
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+              {featuredGallery.map((item) => (
+                <Link
+                  key={item.id}
+                  to="/gallery"
+                  className="group rounded-xl overflow-hidden border border-zinc-800 bg-[#0b0d17] hover:border-indigo-400/60 transition-colors"
+                >
+                  <div className="aspect-[4/3] w-full overflow-hidden">
+                    <ResilientImage
+                      src={item.imageUrl}
+                      alt={item.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <p className="font-mono text-xs text-indigo-300">
+                      {item.category} · {item.year}
+                    </p>
+                    <h3 className="mt-1 font-display text-base font-bold text-white">{item.title}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -96,7 +96,7 @@ VALUES
     '["Sensor calibration", "Accuracy & repeatability", "Speed optimization", "Control systems"]'::jsonb,
     'Beginner–Intermediate (confirm officially)',
     'Beginners or teams interested in embedded control',
-    '/src/assets/images/cat_line_follower_1795021276425.jpg',
+    '/assets/optimized/cat_line_follower.webp',
     'Exact track geometry, sensor limits, and scoring weights remain configurable until official confirmation.',
     1
   ),
@@ -110,7 +110,7 @@ VALUES
     '["Algorithm design", "Sensor integration", "Autonomous decision-making"]'::jsonb,
     'Intermediate (confirm officially)',
     'Teams interested in programming, logic, and autonomous navigation',
-    '/src/assets/images/cat_maze_solver_1795021275809.jpg',
+    '/assets/optimized/cat_maze_solver.webp',
     'Maze cell dimensions, wall height, and run timing rules remain configurable until officially confirmed.',
     2
   ),
@@ -124,7 +124,7 @@ VALUES
     '["Control theory", "Signal processing", "Real-time system dynamics"]'::jsonb,
     'Advanced (confirm officially)',
     'Experienced teams seeking a challenging real-time control problem',
-    '/src/assets/images/cat_self_balancing_1795021276525.jpg',
+    '/assets/optimized/cat_self_balancing.webp',
     'Disturbance tests, payload rules, and arena scoring criteria remain configurable until officially confirmed.',
     3
   )

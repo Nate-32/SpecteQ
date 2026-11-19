@@ -29,8 +29,8 @@ export function LoginPage() {
   };
 
   const fillSampleTeam = () => {
-    setIdentifier('vectorpulse');
-    setPassword('SpecteQ#101');
+    setIdentifier('test1');
+    setPassword('Test@1234');
     setError('');
   };
 
@@ -75,7 +75,7 @@ export function LoginPage() {
                 autoComplete="username"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="vectorpulse"
+                placeholder="test1"
                 className="w-full rounded-lg border border-zinc-800 bg-[#090b14] px-3.5 py-2.5 text-sm text-white focus:border-indigo-400 focus:outline-none"
               />
             </div>
@@ -113,17 +113,17 @@ export function LoginPage() {
           {!supabaseConnected && (
             <div className="rounded-lg border border-zinc-800 bg-[#090b14] p-3.5 space-y-2 text-xs text-zinc-300">
               <div className="flex items-center justify-between gap-2">
-                <span className="font-mono text-amber-300">Preview Persistence Mode</span>
+                <span className="font-mono text-amber-300">Test User Access</span>
                 <button
                   type="button"
                   onClick={fillSampleTeam}
                   className="rounded border border-indigo-400/40 bg-indigo-500/15 px-2.5 py-1 font-semibold text-indigo-200 hover:bg-indigo-500/25"
                 >
-                  Fill Sample Team
+                  Fill Test User 1
                 </button>
               </div>
               <p className="text-zinc-400">
-                Sample Team: <code className="text-zinc-200">vectorpulse</code> / <code className="text-zinc-200">SpecteQ#101</code> (or create new teams in the Admin Panel).
+                Test Users: <code className="text-zinc-200">test1</code> / <code className="text-zinc-200">test2</code> · Password: <code className="text-zinc-200">Test@1234</code>
               </p>
             </div>
           )}
@@ -156,12 +156,6 @@ export function AdminGatePage() {
       return;
     }
     navigate('/admin/dashboard', {replace: true});
-  };
-
-  const fillDemoAdmin = () => {
-    setEmail('admin@specteq.dev');
-    setPassword('SpecteQ@2027');
-    setError('');
   };
 
   return (
@@ -199,7 +193,7 @@ export function AdminGatePage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@specteq.dev"
+                placeholder="admin@specteq2027.com"
                 className="w-full rounded-lg border border-zinc-800 bg-[#090b14] px-3.5 py-2.5 text-sm text-white focus:border-fuchsia-400 focus:outline-none"
               />
             </div>
@@ -227,24 +221,6 @@ export function AdminGatePage() {
               {loading ? 'Verifying Access...' : 'Sign In to Admin Console'}
             </button>
           </form>
-
-          {!supabaseConnected && (
-            <div className="rounded-lg border border-zinc-800 bg-[#090b14] p-3.5 space-y-2 text-xs text-zinc-300">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-fuchsia-300">Preview Admin Access</span>
-                <button
-                  type="button"
-                  onClick={fillDemoAdmin}
-                  className="rounded border border-fuchsia-500/40 bg-fuchsia-500/15 px-2.5 py-1 font-semibold text-fuchsia-200 hover:bg-fuchsia-500/25"
-                >
-                  Fill Admin Demo
-                </button>
-              </div>
-              <p className="text-zinc-400">
-                Demo credentials: <code className="text-zinc-200">admin@specteq.dev</code> / <code className="text-zinc-200">SpecteQ@2027</code>
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>
